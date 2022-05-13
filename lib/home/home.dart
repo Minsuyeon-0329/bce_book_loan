@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
       children: [
         SizedBox(
           height: 100,
-          width: 100,
+          width: 200,
         ),
         Expanded(
           child: GridView.count(
