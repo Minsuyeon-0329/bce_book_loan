@@ -68,26 +68,17 @@ class HomePage extends StatelessWidget {
 
   Widget getBody() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-          child: Text('대여 현황'),
-        ),
         Expanded(
-          flex: 1,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            padding: const EdgeInsets.all(20.0),
             child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Color.fromRGBO(199,201,199, 1),
-              ),
+                color: Color.fromRGBO(10, 101, 83, 1)
+              
             ),
           ),
         ),
         Expanded(
-          flex: 2,
           child: GridView.count(
             primary: false,
             padding: EdgeInsets.all(20),
@@ -98,55 +89,36 @@ class HomePage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text("Hello"),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Color.fromRGBO(199,201,199, 1)
-                ),
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
             ],
           ),
         ),
-
       ],
     );
   }
