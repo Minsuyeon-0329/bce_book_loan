@@ -1,5 +1,5 @@
 import 'package:bce_app/alarm/alarm.dart';
-import 'package:bce_app/bce/bce.dart';
+import 'package:bce_app/alarm/qr_code.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 
@@ -11,12 +11,12 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             UserAccountsDrawerHeader(
               currentAccountPicture: const CircleAvatar(
-                backgroundImage: AssetImage('assets/test.jpg'),
+                backgroundImage: AssetImage('asset/test.jpg'),
                 backgroundColor: Color.fromRGBO(199, 201, 199, 1),
               ),
               otherAccountsPictures: const [
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/test.jpg'),
+                  backgroundImage: AssetImage('asset/test.jpg'),
                   backgroundColor: Color.fromRGBO(199, 201, 199, 1),
                 )
               ],
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
               onDetailsPressed: () {
                 const Text('press details');
               },
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color.fromRGBO(10, 101, 83, 1),
               ),
             ),
@@ -101,10 +101,18 @@ class HomePage extends StatelessWidget {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text("Hello"),
-                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => QRCheckScreen(eventKeyword: 'userId'));
+                },
+                child: Container(
+                    width: 500.0,
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('asset/test.jpg'),
+                      ),
+                    )),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -163,10 +171,7 @@ class HomePage extends StatelessWidget {
           decoration: BoxDecoration(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Icon(Icons.home),
-              IconButton(onPressed: (){Get.to(()=>BCEPage());}, icon: Icon(Icons.add)),
-              Icon(Icons.person)],
+            children: [Icon(Icons.home), Icon(Icons.add), Icon(Icons.person)],
           ),
         ));
   }
