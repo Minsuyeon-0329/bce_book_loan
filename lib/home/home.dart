@@ -1,4 +1,5 @@
 import 'package:bce_app/alarm/alarm.dart';
+import 'package:bce_app/bce/bce.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 
@@ -162,7 +163,10 @@ class HomePage extends StatelessWidget {
           decoration: BoxDecoration(),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Icon(Icons.home), Icon(Icons.add), Icon(Icons.person)],
+            children: [
+              Icon(Icons.home),
+              IconButton(onPressed: (){Get.to(()=>BCEPage());}, icon: Icon(Icons.add)),
+              Icon(Icons.person)],
           ),
         ));
   }
