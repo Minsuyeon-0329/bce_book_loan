@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Scaffold(
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
@@ -58,7 +57,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
       appBar: AppBar(
         title: const Center(child: Text('의생명융합공학부♡')),
         backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
@@ -77,17 +75,28 @@ class HomePage extends StatelessWidget {
 
   Widget getBody() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(color: const Color.fromRGBO(10, 101, 83, 1)),
-          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+          child: Text('대여 현황'),
         ),
         Expanded(
+          flex: 2,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(199,201,199, 1),
+                borderRadius: BorderRadius.circular(25),
+              ),
+          ),
+        ),),
+        Expanded(
+          flex: 2,
           child: GridView.count(
             primary: false,
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
             crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
@@ -95,36 +104,69 @@ class HomePage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text("Hello"),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                  borderRadius: BorderRadius.circular(15)
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                    borderRadius: BorderRadius.circular(15)
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                    borderRadius: BorderRadius.circular(15)
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                    borderRadius: BorderRadius.circular(15)
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                    borderRadius: BorderRadius.circular(15)
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                color: Color.fromRGBO(10, 101, 83, 1),
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(199,201,199, 1),
+                    borderRadius: BorderRadius.circular(15)
+                ),
               ),
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Text('행사'),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(199,201,199, 1),
+                borderRadius: BorderRadius.circular(25),
+              ),
+            ),
+          ),),
       ],
     );
   }
