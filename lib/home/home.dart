@@ -85,11 +85,12 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(199,201,199, 1),
+                color: Color.fromRGBO(199, 201, 199, 1),
                 borderRadius: BorderRadius.circular(25),
               ),
+            ),
           ),
-        ),),
+        ),
         Expanded(
           flex: 2,
           child: GridView.count(
@@ -102,50 +103,32 @@ class HomePage extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text("Hello"),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                  borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(199,201,199, 1),
-                    borderRadius: BorderRadius.circular(15)
-                ),
+                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
               ),
             ],
           ),
@@ -160,11 +143,12 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(199,201,199, 1),
+                color: Color.fromRGBO(199, 201, 199, 1),
                 borderRadius: BorderRadius.circular(25),
               ),
             ),
-          ),),
+          ),
+        ),
       ],
     );
   }
