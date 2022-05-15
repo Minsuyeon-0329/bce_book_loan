@@ -8,56 +8,66 @@ class HomePage extends StatelessWidget {
       drawer: Scaffold(
         drawer: Drawer(
           child: ListView(
-            children: [
+            children: <Widget>[
               UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/profile.jpeg'),
+                accountName: const Text(
+                  '최준영',
+                  style: TextStyle(color: Colors.black),
                 ),
-                otherAccountsPictures: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/profilejpeg'),
-                  )
-                ],
-                //accountEmail: Text('@gamil.com'),
-                //accountName: Text('daaam'),
+                accountEmail: const Text(
+                  'chois@naver.com',
+                  style: TextStyle(color: Colors.black),
+                ),
                 onDetailsPressed: () {
-                  print('press details');
+                  const Text('press details');
                 },
+                currentAccountPicture: const CircleAvatar(
+                  backgroundImage: AssetImage('assets/test.jpg'),
+                ),
                 decoration: BoxDecoration(
                     color: Colors.blue[300],
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40),
-                    )), accountName: null, accountEmail: null,
+                    )),
               ),
               ListTile(
                 leading: Icon(Icons.home, color: Colors.grey[850]),
-                title: Text('Home'), onTap: () { print('Home is clicked'); },
-                trailing: Icon(Icons.add),
+                title: const Text('Home'),
+                onTap: () {
+                  const Text('Home is clicked');
+                },
+                trailing: const Icon(Icons.add),
               ),
               ListTile(
                 leading: Icon(Icons.settings, color: Colors.grey[850]),
-                title: Text('Setting'), onTap: () { print('Setting is clicked'); },
+                title: const Text('Setting'),
+                onTap: () {
+                  const Text('Setting is clicked');
+                },
                 trailing: Icon(Icons.add),
               ),
               ListTile(
                 leading: Icon(Icons.question_answer, color: Colors.grey[850]),
-                title: Text('Q&A'), onTap: () { print('Q&A is clicked'); },
-                trailing: Icon(Icons.add),
+                title: const Text('Q&A'),
+                onTap: () {
+                  const Text('Q&A is clicked');
+                },
+                trailing: const Icon(Icons.add),
               ),
             ],
           ),
         ),
       ),
       appBar: AppBar(
-        title: Center(child: Text('의생명융합공학부♡')),
-        backgroundColor: Color.fromRGBO(10, 101, 83, 1),
+        title: const Center(child: Text('의생명융합공학부♡')),
+        backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
         actions: [
           IconButton(
               onPressed: () {
                 Get.to(() => AlarmPage());
               },
-              icon: Icon(Icons. alarm))
+              icon: const Icon(Icons.alarm))
         ],
       ),
       body: getBody(),
@@ -65,17 +75,13 @@ class HomePage extends StatelessWidget {
     );
   }
 
-
   Widget getBody() {
     return Column(
       children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Container(
-                color: Color.fromRGBO(10, 101, 83, 1)
-              
-            ),
+            child: Container(color: const Color.fromRGBO(10, 101, 83, 1)),
           ),
         ),
         Expanded(
