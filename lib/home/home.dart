@@ -5,60 +5,58 @@ import 'package:get/get.dart';
 class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: const Text(
-                  '최준영',
-                  style: TextStyle(color: Colors.black),
-                ),
-                accountEmail: const Text(
-                  'chois@naver.com',
-                  style: TextStyle(color: Colors.black),
-                ),
-                onDetailsPressed: () {
-                  const Text('press details');
-                },
-                currentAccountPicture: const CircleAvatar(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              currentAccountPicture: const CircleAvatar(
+                backgroundImage: AssetImage('assets/test.jpg'),
+                backgroundColor: Color.fromRGBO(199, 201, 199, 1),
+              ),
+              otherAccountsPictures: const [
+                CircleAvatar(
                   backgroundImage: AssetImage('assets/test.jpg'),
-                ),
-                decoration: BoxDecoration(
-                    color: Colors.blue[300],
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(40),
-                      bottomRight: Radius.circular(40),
-                    )),
+                  backgroundColor: Color.fromRGBO(199, 201, 199, 1),
+                )
+              ],
+              accountName: const Text('최준영'),
+              accountEmail: const Text('chois@naver.com'),
+              onDetailsPressed: () {
+                const Text('press details');
+              },
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(10, 101, 83, 1),
               ),
-              ListTile(
-                leading: Icon(Icons.home, color: Colors.grey[850]),
-                title: const Text('Home'),
-                onTap: () {
-                  const Text('Home is clicked');
-                },
-                trailing: const Icon(Icons.add),
-              ),
-              ListTile(
-                leading: Icon(Icons.settings, color: Colors.grey[850]),
-                title: const Text('Setting'),
-                onTap: () {
-                  const Text('Setting is clicked');
-                },
-                trailing: Icon(Icons.add),
-              ),
-              ListTile(
-                leading: Icon(Icons.question_answer, color: Colors.grey[850]),
-                title: const Text('Q&A'),
-                onTap: () {
-                  const Text('Q&A is clicked');
-                },
-                trailing: const Icon(Icons.add),
-              ),
-            ],
-          ),
+            ),
+            ListTile(
+              leading: Icon(Icons.home, color: Color.fromRGBO(199, 201, 199, 1)),
+              title: const Text('Home'),
+              onTap: () {
+                const Text('Home is clicked');
+              },
+              trailing: const Icon(Icons.add),
+            ),
+            ListTile(
+              leading: Icon(Icons.settings, color: Color.fromRGBO(199, 201, 199, 1)),
+              title: const Text('Setting'),
+              onTap: () {
+                const Text('Setting is clicked');
+              },
+              trailing: Icon(Icons.add),
+            ),
+            ListTile(
+              leading: Icon(Icons.question_answer, color: Color.fromRGBO(199, 201, 199, 1)),
+              title: const Text('Q&A'),
+              onTap: () {
+                const Text('Q&A is clicked');
+              },
+              trailing: const Icon(Icons.add),
+            ),
+          ],
         ),
+      ),
       appBar: AppBar(
-        title: const Center(child: Text('의생명융합공학부♡')),
+        title: const Center(child: Text('의생명융합공학부')),
         backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
         actions: [
           IconButton(
