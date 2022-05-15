@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       drawer: getDrawer(),
       appBar: AppBar(
-        title: Center(child: Text('의생명융합공학부')),
+        title: Center(child: Text('의생명융합공학부♡')),
         backgroundColor: Color.fromRGBO(10, 101, 83, 1),
         actions: [
           IconButton(
