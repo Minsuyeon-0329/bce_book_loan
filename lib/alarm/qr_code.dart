@@ -11,9 +11,9 @@ class QR extends StatelessWidget {
       title: 'QR/Bar코드인식 with 진동/소리',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: QRCode(title: 'QR/Bar코드인식 with 진동/소리'),
+      home: QRCode(title: 'QR'),
     );
   }
 }
@@ -62,10 +62,9 @@ class _QRCode extends State<QRCode> {
   /// QR/Bar Code 스캔 성공시 호출
   _qrCallback(String? code) {
     setState(() {
-      // 동일한걸 계속 읽을 경우 한번만 소리/진동 실행..
       if (code != _qrInfo) {
-        FlutterBeep.beep(); // 비프음
-        if (_canVibrate) Vibrate.feedback(FeedbackType.heavy); // 진동
+        FlutterBeep.beep();
+        if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
       }
       _camState = false;
       _qrInfo = code;
@@ -85,19 +84,15 @@ class _QRCode extends State<QRCode> {
               height: 500,
               width: 500,
               child: QRBarScannerCamera(
-                // 에러 발생시..
                 onError: (context, error) => Text(
                   error.toString(),
                   style: TextStyle(color: Colors.red),
                 ),
-                // QR 이 읽혔을 경우
                 qrCodeCallback: (code) {
                   _qrCallback(code);
                 },
               ),
             ),
-
-            /// 사이즈 자동 조절을 위해 FittedBox 사용
             FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
