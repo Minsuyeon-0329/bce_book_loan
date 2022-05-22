@@ -1,64 +1,110 @@
-// import 'package:flutter/material.dart';
-// import 'package:qr_code_scanner/qr_code_scanner.dart';
-//
-// class QRCheckScreen extends StatefulWidget {
-//   static const String ROUTE_NAME = '/qr_check_screen';
-//
-//   final String eventKeyword; //건져올 특정 키워드
-//
-//   QRCheckScreen({required this.eventKeyword});
-//
-//   @override
-//   State<QRCheckScreen> createState() => _QRCheckScreenState();
-// }
-//
-// class _QRCheckScreenState extends State<QRCheckScreen> {
-//   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-//   QRViewController? controller;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     Size screenSize = MediaQuery.of(context).size;
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: Text('QR스캐너'),
-//         ),
-//         body: Column(
-//           crossAxisAlignment: CrossAxisAlignment.center,
-//           children: [
-//             Expanded(
-//               child: Container(
-//                 child: QRView(
-//                   key: qrKey,
-//                   onQRViewCreated: this._onQRViewCreated,
-//                   formatsAllowed: [BarcodeFormat.qrcode],
-//                   overlay: QrScannerOverlayShape(
-//                     borderRadius: 10,
-//                     borderColor: Colors.blue,
-//                     borderLength: 30,
-//                     borderWidth: 5,
-//                     cutOutSize: screenSize.width / 1.4,
-//                   ),
-//                 ),
-//               ),
-//             )
-//           ],
-//         ));
-//   }
-//
-//   void _onQRViewCreated(QRViewController controller) {
-//     this.controller = controller;
-//     controller.scannedDataStream.listen((event) {
-//       print('QRCheckScreen_onQRViewCreated.listen : result=${event.code}');
-//
-//       if (event.code != null) {
-//         //스캔된 QR코드에 특정 키워드가 들어있다면
-//         //QR스캔을 정지하고 이 화면을 닫으면서 QR결과값을 보내주도록한다.
-//         if (event.code!.contains(widget.eventKeyword)) {
-//           this.controller!.dispose();
-//           Navigator.pop(context, event.code);
-//         }
-//       }
-//     });
-//   }
-// }
+import 'package:flutter/material.dart';
+import 'package:flutter_beep/flutter_beep.dart';
+import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
+import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:wakelock/wakelock.dart';
+
+class QR extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'QR/Bar코드인식 with 진동/소리',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: QRCode(title: 'QR/Bar코드인식 with 진동/소리'),
+    );
+  }
+}
+
+class QRCode extends StatefulWidget {
+  QRCode({Key? key, this.title}) : super(key: key);
+
+  final String? title;
+
+  @override
+  _QRCode createState() => _QRCode();
+}
+
+class _QRCode extends State<QRCode> {
+  String? _qrInfo = '스캔하세요';
+  bool _canVibrate = true;
+  bool _camState = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  /// 초기화 함수
+  _init() async {
+    bool canVibrate = await Vibrate.canVibrate;
+    setState(() {
+      // 화면 꺼짐 방지
+      Wakelock.enable();
+
+      // QR 코드 스캔 관련
+      _camState = true;
+
+      // 진동 관련
+      _canVibrate = canVibrate;
+      _canVibrate ? debugPrint('This device can vibrate') : debugPrint('This device cannot vibrate');
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  /// QR/Bar Code 스캔 성공시 호출
+  _qrCallback(String? code) {
+    setState(() {
+      // 동일한걸 계속 읽을 경우 한번만 소리/진동 실행..
+      if (code != _qrInfo) {
+        FlutterBeep.beep(); // 비프음
+        if (_canVibrate) Vibrate.feedback(FeedbackType.heavy); // 진동
+      }
+      _camState = false;
+      _qrInfo = code;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(widget.title!),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 500,
+              width: 500,
+              child: QRBarScannerCamera(
+                // 에러 발생시..
+                onError: (context, error) => Text(
+                  error.toString(),
+                  style: TextStyle(color: Colors.red),
+                ),
+                // QR 이 읽혔을 경우
+                qrCodeCallback: (code) {
+                  _qrCallback(code);
+                },
+              ),
+            ),
+
+            /// 사이즈 자동 조절을 위해 FittedBox 사용
+            FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  _qrInfo!,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ))
+          ],
+        ));
+  }
+}

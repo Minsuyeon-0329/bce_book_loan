@@ -1,7 +1,8 @@
+import 'package:bce_app/alarm/qr_code.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,16 +34,17 @@ class HomePage extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                 // Get.to(() => QRCheckScreen(eventKeyword: 'userId'));
+                  Get.to(() => QR());
                 },
-               child: Container(
+                child: Container(
                     width: 500.0,
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('asset/test.jpg'),
                       ),
-                    )),),
+                    )),
+              ),
               Container(
                 padding: const EdgeInsets.all(8),
                 child: const Text('Hi'),
@@ -90,6 +92,4 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
-
-
 }
