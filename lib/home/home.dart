@@ -1,4 +1,4 @@
-import 'package:bce_app/alarm/qr_code.dart';
+import 'package:bce_app/function/qr_code.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
 
@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('asset/test.jpg'),
+                        image: AssetImage('asset/qr_code.png'),
                       ),
                     )),
               ),
