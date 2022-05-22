@@ -10,8 +10,9 @@ import '../home/home.dart';
 
 class MainViewPage extends StatelessWidget {
   List<Widget> _bodyContent = [
-    HomePage(),
-    BCEPage(),
+     HomePage(),
+     BCEPage(),
+
     MyPage(),
   ];
 

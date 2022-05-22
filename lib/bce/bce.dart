@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class BCEPage extends StatelessWidget {
@@ -5,8 +7,20 @@ class BCEPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
+    return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            bottom: TabBar(
+              tabs: [
+                Tab(text: '도서'),
+                Tab(text: '공간'),
+                Tab(text:'행사'),
+                Tab(text: '기기')
+              ],
+            ),
+          ),
+        )
     );
   }
 }
