@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                child: Container(
                     width: 500.0,
                     padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('asset/test.jpg'),
                       ),
