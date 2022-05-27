@@ -1,3 +1,4 @@
+import 'package:bce_app/function/settings.dart';
 import 'package:bce_app/main/main_controller.dart';
 import 'package:bce_app/myhomepage.dart';
 import 'package:bce_app/settings.dart';
@@ -10,9 +11,9 @@ import '../home/home.dart';
 
 class MainViewPage extends StatelessWidget {
   List<Widget> _bodyContent = [
-     HomePage(),
-     BCEPage(),
-     MyPage(),
+    HomePage(),
+    BCEPage(),
+    MyPage(),
   ];
 
   @override
@@ -50,17 +51,17 @@ class MainViewPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-            elevation: 0,
-            title: const Center(child: Text('의생명융합공학부')),
-            backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Get.to(() => AlarmPage());
-                    },
-                  icon: const Icon(Icons.alarm))
-            ],
-          ),
+        elevation: 0,
+        title: const Center(child: Text('의생명융합공학부')),
+        backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Get.to(() => AlarmPage());
+              },
+              icon: const Icon(Icons.alarm))
+        ],
+      ),
       body: Obx(() => _bodyContent[mainController.pageIndex]),
       bottomNavigationBar: getFooter(),
     );
