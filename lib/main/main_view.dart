@@ -12,8 +12,7 @@ class MainViewPage extends StatelessWidget {
   List<Widget> _bodyContent = [
      HomePage(),
      BCEPage(),
-
-    MyPage(),
+     MyPage(),
   ];
 
   @override
@@ -51,17 +50,17 @@ class MainViewPage extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
-        elevation: 0,
-        title: const Center(child: Text('의생명융합공학부')),
-        backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Get.to(() => AlarmPage());
-              },
-              icon: const Icon(Icons.alarm))
-        ],
-      ),
+            elevation: 0,
+            title: const Center(child: Text('의생명융합공학부')),
+            backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Get.to(() => AlarmPage());
+                    },
+                  icon: const Icon(Icons.alarm))
+            ],
+          ),
       body: Obx(() => _bodyContent[mainController.pageIndex]),
       bottomNavigationBar: getFooter(),
     );

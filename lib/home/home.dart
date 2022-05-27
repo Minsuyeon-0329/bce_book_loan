@@ -1,3 +1,4 @@
+import 'package:bce_app/bce/book.dart';
 import 'package:bce_app/function/qr_code.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
@@ -45,10 +46,15 @@ class HomePage extends StatelessWidget {
                       ),
                     )),
               ),
-              Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('Hi'),
-                decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
+              GestureDetector(
+                onTap: (){
+                  Get.to(()=> BookPage());
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  child: const Text('Hi'),
+                  decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
+                ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
