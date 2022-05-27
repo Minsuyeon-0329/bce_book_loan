@@ -1,7 +1,6 @@
 import 'package:bce_app/function/settings.dart';
 import 'package:bce_app/main/main_controller.dart';
 import 'package:bce_app/myhomepage.dart';
-import 'package:bce_app/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
