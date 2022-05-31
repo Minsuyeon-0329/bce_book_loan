@@ -6,10 +6,9 @@ class AskUs extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.transparent,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
+          centerTitle: true,
+          title: const Text('문의하기'),
+          backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
         ),
         extendBodyBehindAppBar: true,
         body: Column(

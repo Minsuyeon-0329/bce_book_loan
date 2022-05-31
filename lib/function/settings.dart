@@ -7,7 +7,7 @@ class Setting extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const Text('의생명융합공학부'),
+        title: const Text('설정'),
         backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
       ),
       body: Padding(
