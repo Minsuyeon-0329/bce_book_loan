@@ -5,24 +5,9 @@ import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:wakelock/wakelock.dart';
 
-class QR extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'QR',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Color.fromRGBO(10, 101, 83, 1),
-      ),
-      home: QRCode(title: 'QR'),
-    );
-  }
-}
+
 
 class QRCode extends StatefulWidget {
-  QRCode({Key? key, this.title}) : super(key: key);
-
-  final String? title;
 
   @override
   _QRCode createState() => _QRCode();
@@ -77,7 +62,8 @@ class _QRCode extends State<QRCode> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.title!),
+          elevation: 0,
+          title: Text('OR_scanner'),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(10, 101, 83, 1),
         ),

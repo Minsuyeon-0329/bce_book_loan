@@ -37,9 +37,8 @@ class MainViewPage extends StatelessWidget {
       body: Obx(() => _bodyContent[mainController.pageIndex]),
       bottomNavigationBar: Obx(()=>getFooter()),
       floatingActionButton: FloatingActionButton(
-        elevation: 0,
         backgroundColor: Color.fromRGBO(10, 101, 83, 1),
-        onPressed: (){Get.to(() => QR());},
+        onPressed: (){Get.to(() => QRCode());},
         child:Icon(Icons.qr_code_scanner),
       ),
     );
