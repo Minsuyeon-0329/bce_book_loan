@@ -35,17 +35,7 @@ class BCEPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return Card(
 
-                        );
-                      },
-                      separatorBuilder: (context,index)=> Divider(),
-                      itemCount: 10),
-                )
               ],
             ),
           ),
