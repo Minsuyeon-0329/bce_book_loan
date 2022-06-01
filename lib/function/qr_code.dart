@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beep/flutter_beep.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
@@ -77,6 +78,8 @@ class _QRCode extends State<QRCode> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title!),
+          centerTitle: true,
+          backgroundColor: Color.fromRGBO(10, 101, 83, 1),
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -109,38 +112,55 @@ class _QRCode extends State<QRCode> {
               //      _qrInfo!,
               //      style: const TextStyle(fontWeight: FontWeight.bold),
               //    )),
-              SizedBox(height: 15),
-              Row(
-                children: [
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                   Image.asset(
-                    'asset/test.jpg',
+                    'asset/book_example.jpg',
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.width * 0.5 * (4 / 3),
                   ),
-                  SizedBox(width: 15),
-                  Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: const [
-                    Text('제목', style: TextStyle(fontSize: 20)),
-                    Text('코스모스', style: TextStyle(fontSize: 15)),
-                    Text('저자', style: TextStyle(fontSize: 20)),
-                    Text('칼 세이건', style: TextStyle(fontSize: 15)),
-                    Text('출판일', style: TextStyle(fontSize: 20)),
-                    Text('1980', style: TextStyle(fontSize: 15)),
-                    Text('재고', style: TextStyle(fontSize: 20)),
-                    Text('3', style: TextStyle(fontSize: 15)),
-                    Text('대출중', style: TextStyle(fontSize: 20)),
-                    Text('No', style: TextStyle(fontSize: 15)),
-                    Text('도서정보', style: TextStyle(fontSize: 20)),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Text(
-                        'anything',
-                        style: TextStyle(
-                          fontSize: 15,
-                        ),
+                  SizedBox(height: 10),
+                  const Text(
+                    '제목',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text('코스모스', style: TextStyle(fontSize: 15)),
+                  const Text(
+                    '저자',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text('칼 세이건', style: TextStyle(fontSize: 15)),
+                  const Text(
+                    '출판일',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text('1980', style: TextStyle(fontSize: 15)),
+                  const Text(
+                    '재고',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text('3', style: TextStyle(fontSize: 15)),
+                  const Text(
+                    '대출중',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text('No', style: TextStyle(fontSize: 15)),
+                  const Text(
+                    '도서정보',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Text(
+                      'anything',
+                      style: TextStyle(
+                        fontSize: 15,
                       ),
-                    )
-                  ]),
-                ],
+                    ),
+                  )
+                ]),
               ),
             ],
           ),
