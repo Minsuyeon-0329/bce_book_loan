@@ -8,10 +8,10 @@ class QR extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'QR/Bar코드인식 with 진동/소리',
+      title: 'QR',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primaryColor: Color.fromRGBO(10, 101, 83, 1),
       ),
       home: QRCode(title: 'QR'),
     );
@@ -62,9 +62,10 @@ class _QRCode extends State<QRCode> {
   /// QR/Bar Code 스캔 성공시 호출
   _qrCallback(String? code) {
     setState(() {
+      // 동일한걸 계속 읽을 경우 한번만 소리/진동 실행..
       if (code != _qrInfo) {
-        FlutterBeep.beep();
-        if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
+        FlutterBeep.beep(); // 비프음
+        if (_canVibrate) Vibrate.feedback(FeedbackType.heavy); // 진동
       }
       _camState = false;
       _qrInfo = code;
@@ -77,29 +78,72 @@ class _QRCode extends State<QRCode> {
         appBar: AppBar(
           title: Text(widget.title!),
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 500,
-              width: 500,
-              child: QRBarScannerCamera(
-                onError: (context, error) => Text(
-                  error.toString(),
-                  style: TextStyle(color: Colors.red),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 15),
+              Center(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.width * 0.8,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  child: QRBarScannerCamera(
+                    // 에러 발생시..
+                    onError: (context, error) => Text(
+                      error.toString(),
+                      style: TextStyle(color: Colors.red),
+                    ),
+                    // QR 이 읽혔을 경우
+                    qrCodeCallback: (code) {
+                      _qrCallback(code);
+                    },
+                  ),
                 ),
-                qrCodeCallback: (code) {
-                  _qrCallback(code);
-                },
               ),
-            ),
-            FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  _qrInfo!,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ))
-          ],
+
+              /// 사이즈 자동 조절을 위해 FittedBox 사용
+              //FittedBox(
+              //    fit: BoxFit.fitWidth,
+              //    child: Text(
+              //      _qrInfo!,
+              //      style: const TextStyle(fontWeight: FontWeight.bold),
+              //    )),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  Image.asset(
+                    'asset/test.jpg',
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    height: MediaQuery.of(context).size.width * 0.5 * (4 / 3),
+                  ),
+                  SizedBox(width: 15),
+                  Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: const [
+                    Text('제목', style: TextStyle(fontSize: 20)),
+                    Text('코스모스', style: TextStyle(fontSize: 15)),
+                    Text('저자', style: TextStyle(fontSize: 20)),
+                    Text('칼 세이건', style: TextStyle(fontSize: 15)),
+                    Text('출판일', style: TextStyle(fontSize: 20)),
+                    Text('1980', style: TextStyle(fontSize: 15)),
+                    Text('재고', style: TextStyle(fontSize: 20)),
+                    Text('3', style: TextStyle(fontSize: 15)),
+                    Text('대출중', style: TextStyle(fontSize: 20)),
+                    Text('No', style: TextStyle(fontSize: 15)),
+                    Text('도서정보', style: TextStyle(fontSize: 20)),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Text(
+                        'anything',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    )
+                  ]),
+                ],
+              ),
+            ],
+          ),
         ));
   }
 }
