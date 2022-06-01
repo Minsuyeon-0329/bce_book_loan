@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../alarm/alarm.dart';
 import '../bce/bce.dart';
 import '../function/askUs.dart';
+import '../function/qr_code.dart';
 import '../home/home.dart';
 
 class MainViewPage extends StatelessWidget {
@@ -34,7 +35,13 @@ class MainViewPage extends StatelessWidget {
         ],
       ),
       body: Obx(() => _bodyContent[mainController.pageIndex]),
-      bottomNavigationBar: getFooter(),
+      bottomNavigationBar: Obx(()=>getFooter()),
+      floatingActionButton: FloatingActionButton(
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(10, 101, 83, 1),
+        onPressed: (){Get.to(() => QR());},
+        child:Icon(Icons.qr_code_scanner),
+      ),
     );
   }
 }
@@ -90,9 +97,9 @@ Widget getDrawer(){
 Widget getFooter() {
   MainController mainController = Get.put(MainController());
   List buttomItems = [
-    mainController.pageIndex == 0 ? Icon(Icons.home, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.home, color: Colors.black),
-    mainController.pageIndex == 1 ? Icon(Icons.add, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.add, color: Colors.black),
-    mainController.pageIndex == 2 ? Icon(Icons.person, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.person, color: Colors.black)
+    mainController.pageIndex == 0 ? Icon(Icons.home, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.home, color: Color.fromRGBO(170,170,170,1)),
+    mainController.pageIndex == 1 ? Icon(Icons.book, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.book, color: Color.fromRGBO(170,170,170,1)),
+    mainController.pageIndex == 2 ? Icon(Icons.person, color: Color.fromRGBO(10, 101, 83, 1)) : Icon(Icons.person, color: Color.fromRGBO(170,170,170,1))
   ];
   return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),

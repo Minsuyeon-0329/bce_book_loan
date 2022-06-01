@@ -17,12 +17,12 @@ class BCEPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(35, 20, 20, 0),
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Row(
             children: [
-              Text('My 대출',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+              Text('My 대출',style: TextStyle( fontSize: 20)),
               SizedBox(width: 125),
-              Text('QR 코드',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20))
+              Text('QR 코드',style: TextStyle( fontSize: 20))
             ],
           ),
         ),
@@ -38,31 +38,32 @@ class BCEPage extends StatelessWidget {
               Container(
                   padding: const EdgeInsets.all(8),
                   child: const Text('Hi'),
-                  decoration: BoxDecoration(color: Color.fromRGBO(199, 201, 199, 1), borderRadius: BorderRadius.circular(15)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Color.fromRGBO(170,170,170,1))
+                  ),
                 ),
 
                 GestureDetector(
                 onTap: () {
-    Get.to(() => QR());
-    },
-    child: Container(
-        padding: const EdgeInsets.all(8),
-        decoration:  BoxDecoration(
-          color: Color.fromRGBO(199, 201, 199, 1),
-          borderRadius: BorderRadius.circular(15),
-          image: DecorationImage(
-            image: AssetImage('asset/qr_code.png')
-          ))),),
+                  Get.to(() => QR());
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration:  BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(image: AssetImage('asset/qr_code.png')
+                          ))),),
             ],
           ),
         ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(35, 0, 20, 15),
-          child: Text('도서 종류',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+          padding: const EdgeInsets.all(20),
+          child: Text('도서 종류',style: TextStyle( fontSize: 20),),
         ),
         Expanded(
           flex: 2,
-
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Container(
@@ -76,7 +77,7 @@ class BCEPage extends StatelessWidget {
                       decoration: InputDecoration(
                           fillColor: Colors.white,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           hintText: '찾는 도서 검색',
                           prefixIcon: Icon(Icons.search,color: Color.fromRGBO(10, 101, 83, 1),size: 30,),
@@ -87,8 +88,8 @@ class BCEPage extends StatelessWidget {
                 ],
               ),
               decoration: BoxDecoration(
-                color: Color.fromRGBO(199, 201, 199, 1),
-                borderRadius: BorderRadius.circular(25),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
