@@ -92,12 +92,12 @@ class _QRCode extends State<QRCode> {
               ),
 
               /// 사이즈 자동 조절을 위해 FittedBox 사용
-              //FittedBox(
-              //    fit: BoxFit.fitWidth,
-              //    child: Text(
-              //      _qrInfo!,
-              //      style: const TextStyle(fontWeight: FontWeight.bold),
-              //    )),
+              FittedBox(
+                 fit: BoxFit.fitWidth,
+                 child: Text(
+                   _qrInfo!,
+                   style: const TextStyle(fontWeight: FontWeight.bold),
+                 )),
               const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.all(8.0),
