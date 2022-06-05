@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//https://uaremine.tistory.com/22
+
 class AlarmPage extends StatelessWidget {
   const AlarmPage({Key? key}) : super(key: key);
   static const bool alarmExist = false;

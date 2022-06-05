@@ -1,3 +1,4 @@
+import 'package:bce_app/alarm/popAlarm.dart';
 import 'package:flutter/material.dart';
 
 class Setting extends StatelessWidget {
@@ -16,9 +17,12 @@ class Setting extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('알림설정', style: TextStyle(color: Colors.black, fontSize: 20)),
+            GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('알림설정', style: TextStyle(color: Colors.black, fontSize: 20)),
+              ),
+              onTap: (() => PopAlarm()),
             ),
             const SizedBox(height: 15),
             const Divider(),
