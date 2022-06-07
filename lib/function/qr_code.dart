@@ -1,8 +1,10 @@
+import 'package:bce_app/function/qr_code_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beep/flutter_beep.dart';
 import 'package:flutter_qr_bar_scanner/qr_bar_scanner_camera.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:get/get.dart';
 import 'package:wakelock/wakelock.dart';
 
 class QRCode extends StatefulWidget {
@@ -11,6 +13,7 @@ class QRCode extends StatefulWidget {
 }
 
 class _QRCode extends State<QRCode> {
+  QrCodeController qrcontroller = Get.put(QrCodeController());
   String? _qrInfo = '스캔하세요';
   bool _canVibrate = true;
   bool _camState = false;
@@ -44,6 +47,7 @@ class _QRCode extends State<QRCode> {
       }
       _camState = false;
       _qrInfo = code;
+      qrcontroller.qrInfo = _qrInfo;
     });
   }
 
@@ -77,69 +81,40 @@ class _QRCode extends State<QRCode> {
                   ),
                 ),
               ),
-              IconButton(onPressed: (){
-                print(_qrInfo!);
-                }, icon: Icon(Icons.file_download)),
 
               /// 사이즈 자동 조절을 위해 FittedBox 사용
               FittedBox(
-                 fit: BoxFit.fitWidth,
-                 child: Text(
-                   _qrInfo!,
-                   style: const TextStyle(fontWeight: FontWeight.bold),
-                 ),
-
-
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  _qrInfo!,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  Image.asset(
-                    'asset/book_example.jpg',
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.width * 0.5 * (4 / 3),
-                  ),
+                  //Image.network(qrcontroller.photo,height: 100,width: 100,fit: BoxFit.contain),
                   SizedBox(height: 10),
                   const Text(
                     '제목',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const Text('코스모스', style: TextStyle(fontSize: 15)),
-                  const Text(
-                    '저자',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Text('칼 세이건', style: TextStyle(fontSize: 15)),
-                  const Text(
-                    '출판일',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Text('1980', style: TextStyle(fontSize: 15)),
+                  Text('${qrcontroller.qrlist[0].qrs[index]['title']}', style: TextStyle(fontSize: 15)),
                   const Text(
                     '재고',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const Text('3', style: TextStyle(fontSize: 15)),
-                  const Text(
-                    '대출중',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Text('No', style: TextStyle(fontSize: 15)),
-                  const Text(
-                    '도서정보',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child: Text(
-                      'anything',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  )
+                  Text('${qrcontroller.qrlist[0].qrs[index]['quantity']}', style: TextStyle(fontSize: 15)),
                 ]),
+              ),
+              GestureDetector(
+                onTap: () {
+                  qrcontroller.qrInfo = _qrInfo;
+                },
+                child: Container(
+                  child: Text('대출'),
+                ),
               ),
             ],
           ),

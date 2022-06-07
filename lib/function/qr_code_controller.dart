@@ -1,30 +1,57 @@
-import 'package:flutter_beep/flutter_beep.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:bce_app/function/qr_list.dart';
 import 'package:get/get.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:http/http.dart' as http;
 
-class QRController extends GetxController {
-  String? _qrInfo = '스캔하세요';
-  bool _canVibrate = true;
-  bool _camState = false;
+class Post {
+  final String code;
 
-  bool get init => init;
+  Post({required this.code});
 
-  String get qrCallback => qrCallback;
+  factory Post.fromJson(Map<String, dynamic> json) {
+    return Post(
+      code: json['code'],
+    );
+  }
+}
 
-  set init(bool state) {
-    Future<bool> canVibrate = Vibrate.canVibrate;
-    Wakelock.enable();
-    _camState = true;
-    _canVibrate = canVibrate as bool;
+class QrCodeController extends GetxController {
+  var qrlist = <QRs>[].obs;
+  var qrInfo;
+  Future<Post> fetchPost() async {
+    final response = await http.get(Uri.parse(qrInfo));
+
+    if (response.statusCode == 200) {
+      return Post.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load post');
+    }
   }
 
-  set qrCallback(String? code) {
-    if (code != _qrInfo) {
-      FlutterBeep.beep();
-      if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
+  var photo;
+  late int quantity;
+  late String title;
+  var isLoading = RxBool(true);
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchQR();
+  }
+
+  Future<void> fetchQR() async {
+    var url = 'https://m.site.naver.com/qrcode/view.naver?v=0Yioo'; //get (QR보내고 받는 data)
+    var response = await http.get(Uri.parse(url));
+
+    if (response.statusCode == 200) {
+      QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      qrlist.clear();
+      qrlist.add(QRs(qrs: _qrs.qrs));
+      isLoading.value = false;
+    } else {
+      Get.snackbar('Error Loading data!', 'Server responded: ${response.statusCode}:${response.reasonPhrase.toString()}');
     }
-    _camState = false;
-    _qrInfo = code;
   }
 }
