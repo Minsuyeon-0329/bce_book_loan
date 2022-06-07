@@ -1,5 +1,7 @@
-import 'package:bce_app/alarm/popAlarm.dart';
+import 'package:bce_app/alarm/alarm.dart';
+import 'package:bce_app/function/alphabetSize.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Setting extends StatelessWidget {
   @override
@@ -22,14 +24,21 @@ class Setting extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: const Text('알림설정', style: TextStyle(color: Colors.black, fontSize: 20)),
               ),
-              onTap: (() => PopAlarm()),
+              onTap: () {
+                Get.to(() => AlarmPage());
+              },
             ),
             const SizedBox(height: 15),
             const Divider(),
             const SizedBox(height: 15),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('글씨크기', style: TextStyle(color: Colors.black, fontSize: 20)),
+            GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('글씨크기', style: TextStyle(color: Colors.black, fontSize: 20)),
+              ),
+              onTap: () {
+                Get.to(() => alphabetSize());
+              },
             ),
           ],
         ),

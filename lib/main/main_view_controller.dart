@@ -1,17 +1,17 @@
 import 'package:get/get.dart';
 
-class MainController extends GetxController{
+class MainViewController extends GetxController {
   final _pageIndex = 0.obs;
 
   int get pageIndex => _pageIndex.value;
 
-  set pageIndex(int index){
+  set pageIndex(int index) {
     _pageIndex.value = index;
     update();
   }
 
-  pageTab(int index){
-    _pageIndex.value=index;
+  pageTab(int index) {
+    _pageIndex.value = index;
     update();
   }
 }
