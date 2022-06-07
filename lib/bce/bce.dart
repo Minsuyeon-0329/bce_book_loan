@@ -1,5 +1,9 @@
+import 'package:bce_app/bce/bce_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class BCEPage extends StatelessWidget {
   List? data;
@@ -8,6 +12,8 @@ class BCEPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController textEditingController = TextEditingController();
+    BCEController _bcecontroller = Get.put(BCEController());
+
 
     emptyTheTextFormField() {
       textEditingController.clear();
@@ -44,57 +50,45 @@ class BCEPage extends StatelessWidget {
             // onFieldSubmitted: ,
           ),
         ),
-        IconButton(
-            onPressed: () async {
-              var url = "http://10.125.218.14:8090/books/";
-              var response = await http.get(Uri.parse(url));
-              setState() {
-                result = response.body;
-              }
-
-              print(result);
-            },
-            icon: Icon(Icons.file_download)),
         Expanded(
             flex: 2,
-            // child: Text('$result'),
-            child: displayNoSearchResultScreen()
-            // child: futureSearchResults==null? displayNoSearchResultScreen():displayBookListScreen(),
-            ),
+            child: Obx(()=> _bcecontroller.isLoading.isTrue? const CircularProgressIndicator(): displayNoSearchResultScreen())
 
-        // Divider(thickness: 10,color: Color.fromRGBO(230,230,230, 1),),
-        //
-        // Expanded(
-        //   flex: 1,
-        //   child: Padding(
-        //     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-        //     child:
-        //         Text('My 대출',style: TextStyle( fontSize: 20)),
-        //   ),
-        // ),
-      ],
+        )],
     );
   }
 }
 
 displayNoSearchResultScreen() {
-  return Center(child: ListView.builder(itemBuilder: (context, index) {
+  BCEController _bcecontroller = Get.put(BCEController());
+
+  return ListView.builder(itemBuilder: (context, index) {
+    print(index);
     return Card(
-      child: Container(
-        child: Row(
-          children: <Widget>[],
-        ),
+      child: Row(
+        children: <Widget>[
+          Image.network(_bcecontroller.photoList[0].books[index]['imange_url'],height: 100,width: 100,fit: BoxFit.contain),
+          Column(
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width-150,
+                child: Text('${_bcecontroller.photoList[0].books[index]['title']}',
+                    textAlign: TextAlign.center),
+              ),
+              Text('${_bcecontroller.photoList[0].books[index]['author']}'),
+              Text('${_bcecontroller.photoList[0].books[index]['qr_code']}'),
+              // Text('${_bcecontroller.photoList[0].books[index]['content']}'),
+              Text('${_bcecontroller.photoList[0].books[index]['published_at']}'),
+              Text('Quality: ${_bcecontroller.photoList[0].books[index]['quantity']}'),
+              Text('Number of Books: ${_bcecontroller.photoList[0].books[index]['taken']}'),
+            ],
+          )
+        ],
       ),
     );
-  }));
-  // Column(
-  //   mainAxisAlignment: MainAxisAlignment.center,
-  //   // shrinkWrap: true,
-  //   children: <Widget>[
-  //     Icon(Icons.book, color: Colors.grey, size: 100,),
-  //     Text('Search Book',textAlign: TextAlign.center,style: TextStyle(color: Colors.grey,fontWeight: FontWeight.bold,fontSize: 40),)
-  //   ],
-  // ),
+  });
+
+
 }
 
 displayBookListScreen() {

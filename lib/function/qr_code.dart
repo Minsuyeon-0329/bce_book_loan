@@ -77,6 +77,9 @@ class _QRCode extends State<QRCode> {
                   ),
                 ),
               ),
+              IconButton(onPressed: (){
+                print(_qrInfo!);
+                }, icon: Icon(Icons.file_download)),
 
               /// 사이즈 자동 조절을 위해 FittedBox 사용
               FittedBox(
@@ -84,7 +87,10 @@ class _QRCode extends State<QRCode> {
                  child: Text(
                    _qrInfo!,
                    style: const TextStyle(fontWeight: FontWeight.bold),
-                 )),
+                 ),
+
+
+              ),
               const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.all(8.0),
