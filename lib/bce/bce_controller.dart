@@ -15,12 +15,12 @@ class BCEController extends GetxController{
   }
 
   Future<void> fetchBookData() async{
-    var url = 'http://10.125.218.14:8088/Books';
+    var url = 'http://10.125.218.14:8088/Books/';
     var response = await http.get(Uri.parse(url));
+
 
     if (response.statusCode==200){
       Books _books = Books.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-      print(_books.books);
       photoList.clear();
       photoList.add(Books(books: _books.books));
       isLoading.value =false;

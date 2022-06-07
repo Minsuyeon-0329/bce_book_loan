@@ -1,9 +1,12 @@
 import 'package:bce_app/bce/bce_controller.dart';
+import 'package:bce_app/book/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../book/book_lists.dart';
 
 class BCEPage extends StatelessWidget {
   List? data;
@@ -25,6 +28,7 @@ class BCEPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: TextFormField(
+            // onFieldSubmitted: ,
             cursorColor: Color.fromRGBO(10, 101, 83, 1),
             controller: textEditingController,
             decoration: InputDecoration(
@@ -61,29 +65,45 @@ class BCEPage extends StatelessWidget {
 
 displayNoSearchResultScreen() {
   BCEController _bcecontroller = Get.put(BCEController());
+  var book = _bcecontroller.fetchBookData();
 
-  return ListView.builder(itemBuilder: (context, index) {
-    print(index);
-    return Card(
-      child: Row(
-        children: <Widget>[
-          Image.network(_bcecontroller.photoList[0].books[index]['imange_url'],height: 100,width: 100,fit: BoxFit.contain),
-          Column(
+  return ListView.builder(
+    itemCount: 11,
+      itemBuilder: (context, index) {
+
+        return GestureDetector(
+      onTap: (){Get.to(()=>DetailPage(),arguments: index);},
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width-150,
-                child: Text('${_bcecontroller.photoList[0].books[index]['title']}',
-                    textAlign: TextAlign.center),
-              ),
-              Text('${_bcecontroller.photoList[0].books[index]['author']}'),
-              Text('${_bcecontroller.photoList[0].books[index]['qr_code']}'),
-              // Text('${_bcecontroller.photoList[0].books[index]['content']}'),
-              Text('${_bcecontroller.photoList[0].books[index]['published_at']}'),
-              Text('Quality: ${_bcecontroller.photoList[0].books[index]['quantity']}'),
-              Text('Number of Books: ${_bcecontroller.photoList[0].books[index]['taken']}'),
+              Image.network(_bcecontroller.photoList[0].books[index]['imange_url'],height: 150,width: 100,fit: BoxFit.contain),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width-170,
+                      child: Text('${_bcecontroller.photoList[0].books[index]['title']}',
+                          textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    SizedBox(height: 10,),
+                    Text('저자: ${_bcecontroller.photoList[0].books[index]['author']}'),
+                    Text('출판사: ${_bcecontroller.photoList[0].books[index]['publisher']}'),
+                    // Text('${_bcecontroller.photoList[0].books[index]['qr_code']}'),
+                    // Text('${_bcecontroller.photoList[0].books[index]['content']}'),
+                    Text('출판 연도: ${_bcecontroller.photoList[0].books[index]['published_at']}'),
+                    Text('대여 가능 도서: ${_bcecontroller.photoList[0].books[index]['quantity']}'),
+                    Text('대출 중인 도서: ${_bcecontroller.photoList[0].books[index]['taken']}'),
+                  ],
+                ),
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   });
