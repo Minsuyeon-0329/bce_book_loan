@@ -46,13 +46,13 @@ class MyPage extends StatelessWidget {
             child: ListView(
               children: <Widget>[
                 ListTile(
-                  leading: Image.asset('asset/book_example.jpg'),
-                  title: Text('코스모스(칼 세이건)'),
-                  subtitle: Text('2022-06-06'),
+                  leading: Image.asset('asset/react.jpg'),
+                  title: Text('리액트를 다루는 기술 (김민준)'),
+                  subtitle: Text('2022-06-12'),
                 ),
                 ListTile(
-                  leading: Image.asset('asset/guns_germs_steel.jpg'),
-                  title: Text('총, 균, 쇠(제레미 다이아몬드)'),
+                  leading: Image.asset('asset/python_al.jpg'),
+                  title: Text('파이썬 알고리즘 인터뷰 (박상길)'),
                   subtitle: Text('2022-06-10'),
                 ),
               ],

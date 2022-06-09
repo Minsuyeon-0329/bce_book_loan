@@ -65,11 +65,11 @@ class _QRCode extends State<QRCode> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 15),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.15),
               Center(
                 child: SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.8,
-                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.width * 0.7,
+                  width: MediaQuery.of(context).size.width * 0.7,
                   child: QRBarScannerCamera(
                     onError: (context, error) => Text(
                       error.toString(),
@@ -79,15 +79,6 @@ class _QRCode extends State<QRCode> {
                       _qrCallback(code);
                     },
                   ),
-                ),
-              ),
-
-              /// 사이즈 자동 조절을 위해 FittedBox 사용
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  _qrInfo!,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 15),
@@ -100,21 +91,51 @@ class _QRCode extends State<QRCode> {
                     '제목',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  // Text('${qrcontroller.qrlist[0].qrs[index]['title']}', style: TextStyle(fontSize: 15)),
+                  SizedBox(height: 5),
+                  const Text(
+                    '리액트를 다루는 기술',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  //Text('${qrcontroller.qrlist[0].qrs[index]['title']}', style: TextStyle(fontSize: 15)),
+                  SizedBox(height: 10),
                   const Text(
                     '재고',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  // Text('${qrcontroller.qrlist[0].qrs[index]['quantity']}', style: TextStyle(fontSize: 15)),
+                  SizedBox(height: 5),
+                  const Text(
+                    '1',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  //Text('${qrcontroller.qrlist[0].qrs[index]['quantity']}', style: TextStyle(fontSize: 15)),
+                  SizedBox(height: 20),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                    GestureDetector(
+                      onTap: () {
+                        qrcontroller.qrInfo = _qrInfo;
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(color: Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: Center(child: Text('상세 페이지', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                        //이거는 대출할때만 뜨게
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        qrcontroller.qrInfo = _qrInfo;
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(color: Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
+                        height: 50,
+                        width: MediaQuery.of(context).size.width * 0.35,
+                        child: Center(child: Text('대출', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                        //이거는 대출할때만 뜨게. 반납할때는 반납이라고 뜨게
+                      ),
+                    ),
+                  ]),
                 ]),
-              ),
-              GestureDetector(
-                onTap: () {
-                  qrcontroller.qrInfo = _qrInfo;
-                },
-                child: Container(
-                  child: Text('대출'),
-                ),
               ),
             ],
           ),
