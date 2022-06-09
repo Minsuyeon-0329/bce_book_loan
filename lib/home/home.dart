@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 class HomePage extends StatelessWidget {
+  ScrollController _scrollController = ScrollController();
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,8 +22,6 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
-              child: Scrollbar(
-                thumbVisibility: true,
                 child: ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index){
@@ -41,7 +40,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     }),
-              ),
+
             ),
           ),
         ),
@@ -72,6 +71,7 @@ class HomePage extends StatelessWidget {
               ),
               child: Scrollbar(
                 thumbVisibility: true,
+                controller: _scrollController,
                 child: ListView.builder(
                   itemCount: 3,
                     itemBuilder: (context, index){
@@ -129,8 +129,7 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color:Colors.white,
               ),
-              child: Scrollbar(
-                thumbVisibility: true,
+
                 child: ListView.builder(
                     itemCount: 1,
                     itemBuilder: (context, index){
@@ -154,7 +153,7 @@ class HomePage extends StatelessWidget {
                         ),
                       );
                     }),
-              ),
+
             ),
           ),
         ),
