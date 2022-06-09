@@ -1,6 +1,3 @@
-import 'package:bce_app/login/login.dart';
-import 'package:bce_app/register/register_view.dart';
-import 'package:bce_app/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

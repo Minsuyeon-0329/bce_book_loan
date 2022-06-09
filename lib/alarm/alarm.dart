@@ -34,15 +34,15 @@ class AlarmPage extends StatelessWidget {
                               '반납',
                             ),
                             subtitle: Text(
-                              '코스모스(칼 세이건)',
+                              '리액트를 다루는 기술 (김민준)',
                             )),
                       ),
                       Card(
                         child: ListTile(
-                          leading: Icon(Icons.book, size: 40),
-                          title: Text('예약'),
+                          leading: Icon(Icons.timer, size: 40),
+                          title: Text('반납'),
                           subtitle: Text(
-                            '총, 균, 쇠(제레미 다이아몬드)',
+                            '파이썬 알고리즘 인터뷰 (박상길)',
                           ),
                         ),
                       ),

@@ -56,7 +56,7 @@ class _QRCode extends State<QRCode> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text('OR_scanner'),
+          title: Text('QR_scanner'),
           centerTitle: true,
           backgroundColor: Color.fromRGBO(10, 101, 83, 1),
         ),
@@ -98,15 +98,15 @@ class _QRCode extends State<QRCode> {
                   ),
                   //Text('${qrcontroller.qrlist[0].qrs[index]['title']}', style: TextStyle(fontSize: 15)),
                   SizedBox(height: 10),
-                  const Text(
-                    '재고',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                  //const Text(
+                  //  '재고',
+                  //  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  //),
                   SizedBox(height: 5),
-                  const Text(
-                    '1',
-                    style: TextStyle(fontSize: 15),
-                  ),
+                  //const Text(
+                  //  '1',
+                  //  style: TextStyle(fontSize: 15),
+                  //),
                   //Text('${qrcontroller.qrlist[0].qrs[index]['quantity']}', style: TextStyle(fontSize: 15)),
                   SizedBox(height: 20),
                   Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
