@@ -1,3 +1,4 @@
+import 'package:bce_app/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
