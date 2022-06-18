@@ -56,14 +56,14 @@ class HomePage extends StatelessWidget {
               Text('공지사항', style: TextStyle(fontSize: 20)),
               Container(
                   child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 15,
-                  ),
-                  Text('더보기')
-                ],
-              )),
+                    children: [
+                      Icon(
+                        Icons.add,
+                        size: 15,
+                      ),
+                      Text('더보기')
+                    ],
+                  )),
             ],
           ),
         ),
@@ -122,14 +122,14 @@ class HomePage extends StatelessWidget {
               Text('학사일정', style: TextStyle(fontSize: 20)),
               Container(
                   child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 15,
-                  ),
-                  Text('더보기')
-                ],
-              )),
+                    children: [
+                      Icon(
+                        Icons.add,
+                        size: 15,
+                      ),
+                      Text('더보기')
+                    ],
+                  )),
             ],
           ),
         ),
