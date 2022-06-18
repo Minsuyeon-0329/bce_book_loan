@@ -1,9 +1,14 @@
+import 'package:bce_app/home/schedules.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   ScrollController _scrollController = ScrollController();
   Widget build(BuildContext context) {
+    ScheduleController schedulecontroller = Get.put(ScheduleController());
+    schedulecontroller.fetchPost();
+    int total = schedulecontroller.leng;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,14 +61,14 @@ class HomePage extends StatelessWidget {
               Text('공지사항', style: TextStyle(fontSize: 20)),
               Container(
                   child: Row(
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 15,
-                      ),
-                      Text('더보기')
-                    ],
-                  )),
+                children: [
+                  Icon(
+                    Icons.add,
+                    size: 15,
+                  ),
+                  Text('더보기')
+                ],
+              )),
             ],
           ),
         ),
@@ -122,14 +127,14 @@ class HomePage extends StatelessWidget {
               Text('학사일정', style: TextStyle(fontSize: 20)),
               Container(
                   child: Row(
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 15,
-                      ),
-                      Text('더보기')
-                    ],
-                  )),
+                children: [
+                  Icon(
+                    Icons.add,
+                    size: 15,
+                  ),
+                  Text('더보기')
+                ],
+              )),
             ],
           ),
         ),
@@ -142,7 +147,7 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               ),
               child: ListView.builder(
-                  itemCount: 1,
+                  itemCount: total,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -150,15 +155,15 @@ class HomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 5),
-                          Text('[2022/06/13 ~ 2022/06/18] 1학기 기말고사'),
-                          Divider(),
-                          Text('[2022/06/14 ~ 2022/06/16] 여름계절수업 등록금납부'),
-                          Divider(),
-                          Text('[2022/06/20 ~ 2022/07/01] 2학기 휴,복학기간'),
-                          Divider(),
-                          Text('[2022/06/22 ~ 2022/07/19] 여름계절수업'),
-                          Divider(),
+                          Text(
+                              '[' +
+                                  '${schedulecontroller.schlist[0].sch[index]['fields']['start_at']}' +
+                                  ' ~ ' +
+                                  '${schedulecontroller.schlist[0].sch[index]['fields']['end_at']}' +
+                                  '] ' +
+                                  '${schedulecontroller.schlist[0].sch[index]['fields']['title']}',
+                              style: const TextStyle(fontSize: 13)),
+                          Divider()
                         ],
                       ),
                     );

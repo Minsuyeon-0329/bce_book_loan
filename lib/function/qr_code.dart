@@ -1,3 +1,4 @@
+import 'package:bce_app/book/detail.dart';
 import 'package:bce_app/function/qr_code_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,19 @@ class QRCode extends StatefulWidget {
 
 class _QRCode extends State<QRCode> {
   QrCodeController qrcontroller = Get.put(QrCodeController());
+
+  static bool not_loan = true;
+  static bool loan_return = true;
   String? _qrInfo = '스캔하세요';
   bool _canVibrate = true;
   bool _camState = false;
+  var qr;
 
   @override
   void initState() {
     super.initState();
     _init();
+    qr = qrcontroller.fetchPost();
   }
 
   _init() async {
@@ -41,13 +47,19 @@ class _QRCode extends State<QRCode> {
 
   _qrCallback(String? code) {
     setState(() {
+      _camState = false;
       if (code != _qrInfo) {
+        _qrInfo = code;
+        qrcontroller.qrInfo = _qrInfo;
+        qrcontroller.fetchPost();
+        not_loan = false;
+        if (qrcontroller.returnState = true) {
+          loan_return = false;
+        }
+        ;
         FlutterBeep.beep();
         if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
       }
-      _camState = false;
-      _qrInfo = code;
-      qrcontroller.qrInfo = _qrInfo;
     });
   }
 
@@ -56,89 +68,102 @@ class _QRCode extends State<QRCode> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text('QR_scanner'),
+          title: const Text('QR_scanner'),
           centerTitle: true,
-          backgroundColor: Color.fromRGBO(10, 101, 83, 1),
+          backgroundColor: const Color.fromRGBO(10, 101, 83, 1),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: MediaQuery.of(context).size.width * 0.15),
-              Center(
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.width * 0.7,
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: QRBarScannerCamera(
-                    onError: (context, error) => Text(
-                      error.toString(),
-                      style: TextStyle(color: Colors.red),
-                    ),
-                    qrCodeCallback: (code) {
-                      _qrCallback(code);
-                    },
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: MediaQuery.of(context).size.width * 0.15),
+            Center(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.width * 0.7,
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: QRBarScannerCamera(
+                  onError: (context, error) => Text(
+                    error.toString(),
+                    style: const TextStyle(color: Colors.red),
                   ),
+                  qrCodeCallback: (code) {
+                    _qrCallback(code);
+                  },
                 ),
               ),
-              const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  //Image.network(qrcontroller.photo,height: 100,width: 100,fit: BoxFit.contain),
-                  SizedBox(height: 10),
-                  const Text(
-                    '제목',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 5),
-                  const Text(
-                    '리액트를 다루는 기술',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  //Text('${qrcontroller.qrlist[0].qrs[index]['title']}', style: TextStyle(fontSize: 15)),
-                  SizedBox(height: 10),
-                  //const Text(
-                  //  '재고',
-                  //  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  //),
-                  SizedBox(height: 5),
-                  //const Text(
-                  //  '1',
-                  //  style: TextStyle(fontSize: 15),
-                  //),
-                  //Text('${qrcontroller.qrlist[0].qrs[index]['quantity']}', style: TextStyle(fontSize: 15)),
-                  SizedBox(height: 20),
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                    GestureDetector(
-                      onTap: () {
-                        qrcontroller.qrInfo = _qrInfo;
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(color: Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        child: Center(child: Text('상세 페이지', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
-                        //이거는 대출할때만 뜨게
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        qrcontroller.qrInfo = _qrInfo;
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(color: Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.35,
-                        child: Center(child: Text('대출', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
-                        //이거는 대출할때만 뜨게. 반납할때는 반납이라고 뜨게
-                      ),
-                    ),
-                  ]),
-                ]),
-              ),
-            ],
-          ),
-        ));
+            ),
+            const SizedBox(height: 15),
+            not_loan
+                ? const Center(
+                    child: Text(
+                    '스캔해주세요.',
+                    textAlign: TextAlign.center,
+                  ))
+                : Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: ListView.builder(itemBuilder: (context, index) {
+                      itemCount:
+                      2.compareTo(0);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: loan_return
+                            ? Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
+                                const Text(
+                                  '제목',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 5),
+                                Text('${qrcontroller.qrlist[0].qrs[index]['fields']['title']}', style: const TextStyle(fontSize: 15)),
+                                const SizedBox(height: 10),
+                                const Text(
+                                  '재고',
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 5),
+                                Text('${qrcontroller.qrlist[0].qrs[index]['fields']['quantity']}', style: const TextStyle(fontSize: 15)),
+                                const SizedBox(height: 20),
+                                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Get.to(() => DetailPage(), arguments: index);
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(color: const Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width * 0.35,
+                                      child:
+                                          const Center(child: Text('상세 페이지', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      qrcontroller.Borrow();
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(color: const Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width * 0.35,
+                                      child: const Center(child: Text('대출', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                                    ),
+                                  ),
+                                ]),
+                                SizedBox(height: 1000)
+                              ])
+                            : GestureDetector(
+                                onTap: () {
+                                  Get.to(() => DetailPage());
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(color: const Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
+                                  height: 50,
+                                  width: MediaQuery.of(context).size.width * 0.7,
+                                  child: const Center(child: Text('반납', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                                ),
+                              ),
+                      );
+                    }))
+          ],
+        )));
   }
 }

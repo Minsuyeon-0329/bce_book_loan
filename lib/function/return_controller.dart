@@ -5,7 +5,7 @@ import 'package:bce_app/function/qr_list.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class QrCodeController extends GetxController {
+class ReturnController extends GetxController {
   var qrlist = <QRs>[].obs;
   var qrInfo;
   var photo;
@@ -20,7 +20,7 @@ class QrCodeController extends GetxController {
 
   Future<void> fetchPost() async {
     Map<String, dynamic> data = {"url": qrInfo};
-    Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/QrDecode/', queryParameters: data);
+    Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/Borrow/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));
     if (response.statusCode == 200) {
       QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
@@ -30,14 +30,9 @@ class QrCodeController extends GetxController {
     } else {
       Get.snackbar('Error Loading data!', 'Server responded: ${response.statusCode}:${response.reasonPhrase.toString()}');
     }
-
-    if (qrlist[0].qrs[0]['Return']) {
-      returnState = true;
-    }
-    ;
   }
 
-  Future<void> Borrow() async {
+  Future<void> Back() async {
     Map<String, dynamic> data = {"url": qrInfo};
     Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/QrDecode/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));

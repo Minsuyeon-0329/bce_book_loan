@@ -1,9 +1,6 @@
-import 'package:bce_app/home/home.dart';
 import 'package:bce_app/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import 'main/main_view.dart';
+import 'package:get/getackage:get/get.dart';
 
 void main() {
   runApp(const MyApp());
