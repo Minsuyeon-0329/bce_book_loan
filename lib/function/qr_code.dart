@@ -1,5 +1,6 @@
 import 'package:bce_app/book/detail.dart';
 import 'package:bce_app/function/qr_code_controller.dart';
+import 'package:bce_app/function/return.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beep/flutter_beep.dart';
@@ -53,10 +54,7 @@ class _QRCode extends State<QRCode> {
         qrcontroller.qrInfo = _qrInfo;
         qrcontroller.fetchPost();
         not_loan = false;
-        if (qrcontroller.returnState = true) {
-          loan_return = false;
-        }
-        ;
+        qrcontroller.returnState = true ? loan_return = false : loan_return = true;
         FlutterBeep.beep();
         if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
       }
@@ -104,7 +102,7 @@ class _QRCode extends State<QRCode> {
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: ListView.builder(itemBuilder: (context, index) {
                       itemCount:
-                      2.compareTo(0);
+                      1.compareTo(0);
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: loan_return
@@ -148,16 +146,34 @@ class _QRCode extends State<QRCode> {
                                     ),
                                   ),
                                 ]),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      not_loan = false;
+                                      loan_return = true;
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(30)),
+                                    height: 50,
+                                    width: MediaQuery.of(context).size.width * 0.35,
+                                    child: const Center(child: Text('반납', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
+                                  ),
+                                ),
                                 SizedBox(height: 1000)
                               ])
                             : GestureDetector(
                                 onTap: () {
-                                  Get.to(() => DetailPage());
+                                  Get.to(() => ReturnPage());
+                                  _camState = false;
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(color: const Color.fromRGBO(10, 101, 83, 1), borderRadius: BorderRadius.circular(30)),
                                   height: 50,
-                                  width: MediaQuery.of(context).size.width * 0.7,
+                                  width: MediaQuery.of(context).size.width * 0.35,
                                   child: const Center(child: Text('반납', style: TextStyle(fontSize: 15, color: Colors.white), textAlign: TextAlign.center)),
                                 ),
                               ),

@@ -20,7 +20,7 @@ class ReturnController extends GetxController {
 
   Future<void> fetchPost() async {
     Map<String, dynamic> data = {"url": qrInfo};
-    Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/Borrow/', queryParameters: data);
+    Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/Return/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));
     if (response.statusCode == 200) {
       QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));

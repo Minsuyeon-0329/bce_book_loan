@@ -28,13 +28,13 @@ class QrCodeController extends GetxController {
       qrlist.add(QRs(qrs: _qrs.qrs));
       isLoading.value = false;
     } else {
-      Get.snackbar('Error Loading data!', 'Server responded: ${response.statusCode}:${response.reasonPhrase.toString()}');
+      print(returnState);
+      if (qrlist[0].qrs[0]['Return']) {
+        returnState = true;
+      } else {
+        returnState = false;
+      }
     }
-
-    if (qrlist[0].qrs[0]['Return']) {
-      returnState = true;
-    }
-    ;
   }
 
   Future<void> Borrow() async {

@@ -7,12 +7,12 @@ import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:get/get.dart';
 import 'package:wakelock/wakelock.dart';
 
-class QRCode extends StatefulWidget {
+class ReturnPage extends StatefulWidget {
   @override
-  _QRCode createState() => _QRCode();
+  _ReturnPage createState() => _ReturnPage();
 }
 
-class _QRCode extends State<QRCode> {
+class _ReturnPage extends State<ReturnPage> {
   ReturnController returnController = Get.put(ReturnController());
 
   static bool returning = true;
@@ -50,6 +50,7 @@ class _QRCode extends State<QRCode> {
         _qrInfo = code;
         returnController.qrInfo = _qrInfo;
         returnController.fetchPost();
+        returning = false;
         FlutterBeep.beep();
         if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
       }
@@ -97,7 +98,7 @@ class _QRCode extends State<QRCode> {
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: ListView.builder(itemBuilder: (context, index) {
                       itemCount:
-                      2.compareTo(0);
+                      1.compareTo(0);
                       return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
