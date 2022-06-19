@@ -1,3 +1,5 @@
+import 'package:bce_app/login/login.dart';
+import 'package:bce_app/login/logout_controller.dart';
 import 'package:bce_app/main/main_view_controller.dart';
 import 'package:bce_app/myhomepage.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +49,7 @@ class MainViewPage extends StatelessWidget {
 }
 
 Widget getDrawer() {
+  LogoutController logoutController = Get.put(LogoutController());
   return Drawer(
     child: Column(
       children: <Widget>[
@@ -61,7 +64,13 @@ Widget getDrawer() {
             color: Color.fromRGBO(10, 101, 83, 1),
           ),
         ),
-        ListTile(title: Center(child: Text('로그 아웃'))),
+        GestureDetector(
+            onTap: (){
+              logoutController.logout();
+              Get.to(LoginPage());
+            },
+            child: ListTile(title: Center(child: Text('로그 아웃')))
+        ),
         Divider(),
         Expanded(child: SizedBox()),
         ListTile(

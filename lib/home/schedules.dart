@@ -18,6 +18,7 @@ class ScheduleController extends GetxController {
     http.Response response = await http.get(Uri.parse('http://10.125.218.14:8088/get_schedules'));
     if (response.statusCode == 200) {
       Schedule _sch = Schedule.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      print(_sch.sch);
       leng = _sch.sch.length;
       schlist.clear();
       schlist.add(Schedule(sch: _sch.sch));

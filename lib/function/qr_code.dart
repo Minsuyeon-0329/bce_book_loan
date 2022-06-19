@@ -1,6 +1,5 @@
 import 'package:bce_app/book/detail.dart';
 import 'package:bce_app/function/qr_code_controller.dart';
-import 'package:bce_app/function/return.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beep/flutter_beep.dart';
@@ -167,7 +166,6 @@ class _QRCode extends State<QRCode> {
                               ])
                             : GestureDetector(
                                 onTap: () {
-                                  Get.to(() => ReturnPage());
                                   _camState = false;
                                 },
                                 child: Container(

@@ -1,3 +1,4 @@
+import 'package:bce_app/bce/search_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +6,7 @@ import '../bce/bce_controller.dart';
 
 class DetailPage extends StatelessWidget {
   BCEController _bcecontroller = Get.put(BCEController());
+  SearchController _searchController = Get.put(SearchController());
 
   int index = Get.arguments;
 
@@ -23,7 +25,7 @@ class DetailPage extends StatelessWidget {
           children: [
             Row(
               children: <Widget>[
-                Image.network(_bcecontroller.photoList[0].books[index]['imange_url'], height: 240, width: 160, fit: BoxFit.contain),
+                Image.network(_searchController.searchList.length==0 ? _bcecontroller.photoList[0].books[index]['imange_url'] : _searchController.searchList[0].fields[index]['fields']['imange_url'], height: 240, width: 160, fit: BoxFit.contain),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
                   child: Column(
@@ -31,7 +33,7 @@ class DetailPage extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width - 220,
                         child: Text(
-                          '${_bcecontroller.photoList[0].books[index]['title']}',
+                          '${_searchController.searchList.length==0 ? _bcecontroller.photoList[0].books[index]['title']:_searchController.searchList[0].fields[index]['fields']['title']}',
                           textAlign: TextAlign.center,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -39,16 +41,11 @@ class DetailPage extends StatelessWidget {
                       SizedBox(
                         height: 30,
                       ),
-                      Text(
-                        '저자: ${_bcecontroller.photoList[0].books[index]['author']}',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      Text('출판사: ${_bcecontroller.photoList[0].books[index]['publisher']}', style: TextStyle(fontSize: 16)),
-                      // Text('${_bcecontroller.photoList[0].books[index]['qr_code']}'),
-                      // Text('${_bcecontroller.photoList[0].books[index]['content']}'),
-                      Text('출판 연도: ${_bcecontroller.photoList[0].books[index]['published_at']}', style: TextStyle(fontSize: 16)),
-                      Text('대여 가능 도서: ${_bcecontroller.photoList[0].books[index]['quantity']}', style: TextStyle(fontSize: 16)),
-                      Text('대출 중인 도서: ${_bcecontroller.photoList[0].books[index]['taken']}', style: TextStyle(fontSize: 16)),
+                      Text('저자: ${_searchController.searchList.length==0 ? _bcecontroller.photoList[0].books[index]['author'] : _searchController.searchList[0].fields[index]['fields']['author']}',style: TextStyle(fontSize: 16),),
+                      Text('출판사: ${_searchController.searchList.length==0 ?_bcecontroller.photoList[0].books[index]['publisher']:_searchController.searchList[0].fields[index]['fields']['publisher']}', style: TextStyle(fontSize: 16)),
+                      Text('출판 연도: ${_searchController.searchList.length==0 ?_bcecontroller.photoList[0].books[index]['published_at']:_searchController.searchList[0].fields[index]['fields']['published_at']}', style: TextStyle(fontSize: 16)),
+                      Text('대여 가능 도서: ${_searchController.searchList.length==0 ?_bcecontroller.photoList[0].books[index]['quantity']:_searchController.searchList[0].fields[index]['fields']['quantity']}', style: TextStyle(fontSize: 16)),
+                      Text('대출 중인 도서: ${_searchController.searchList.length==0 ?_bcecontroller.photoList[0].books[index]['taken']:_searchController.searchList[0].fields[index]['fields']['taken']}', style: TextStyle(fontSize: 16)),
                     ],
                   ),
                 )
