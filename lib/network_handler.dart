@@ -17,7 +17,7 @@ class NetWorkHandler{
 
   static Future<String> loginpost(var body, String endpoint) async{
     var loginController = Get.put(LoginController());
-    http.Response response_login = await http.post(builderUrl(endpoint),body:body,headers: {"content-type":"application/json"});
+    http.Response response_login = await http.post(builderUrl(endpoint), body:body, headers: {"content-type":"application/json"});
 
 
     if (response_login.statusCode ==200){
