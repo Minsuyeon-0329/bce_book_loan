@@ -52,18 +52,19 @@ class _QRCode extends State<QRCode> {
 
   _qrCallback(String? code) {
     setState(() {
-      _camState = false;
       if (code != _qrInfo) {
+        _camState = false;
         _qrInfo = code;
         qrcontroller.qrInfo = _qrInfo;
         qrcontroller.fetchPost();
         if (qrcontroller.returnState == true) {
           not_loan = false;
           loan_return = false;
-        }
-        if (qrcontroller.loan == true) {
-          not_loan = false;
-          loan_return = true;
+
+          if (qrcontroller.loan == true) {
+            not_loan = false;
+            loan_return = true;
+          }
         }
         FlutterBeep.beep();
         if (_canVibrate) Vibrate.feedback(FeedbackType.heavy);
@@ -102,6 +103,8 @@ class _QRCode extends State<QRCode> {
                     style: const TextStyle(color: Colors.red),
                   ),
                   qrCodeCallback: (code) {
+                    not_loan = false;
+                    loan_return = qrcontroller.loan;
                     _qrCallback(code);
                   },
                 ),
@@ -167,7 +170,6 @@ class _QRCode extends State<QRCode> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        qrcontroller.fetchPost();
                                         no_info = false;
                                         Text('도서 QR을 찍어주세요.');
                                       },
@@ -189,7 +191,7 @@ class _QRCode extends State<QRCode> {
                                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 5),
-                                  Text('${qrcontroller.qrlist[0].qrs[0]['fields']['title']}', style: const TextStyle(fontSize: 15)),
+                                  Obx(() => Text('${qrcontroller.qrlist[0].qrs[0]['fields']['title']}', style: const TextStyle(fontSize: 15))),
                                   const SizedBox(height: 10),
                                   GestureDetector(
                                     onTap: () {

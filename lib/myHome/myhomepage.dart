@@ -1,3 +1,4 @@
+import 'package:bce_app/network_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -25,9 +26,9 @@ class MyPage extends StatelessWidget {
               width: 15,
             ),
             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Text('이름: 최준영', style: TextStyle(color: Colors.black, fontSize: 15)),
+              Text('이름: ' + '${NetWorkHandler.user_name}', style: const TextStyle(fontSize: 15)),
               Container(height: 15),
-              const Text('학번: 202055179', style: TextStyle(color: Colors.black, fontSize: 15))
+              Text('학번: ' + '${NetWorkHandler.user_num}', style: TextStyle(color: Colors.black, fontSize: 15))
             ])
           ]),
           const SizedBox(height: 15),
@@ -37,31 +38,26 @@ class MyPage extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text('My 대출', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                Text('대여권수: 2', style: TextStyle(fontSize: 15)),
+                Text('대여권수: ' + '${NetWorkHandler.user_borrow.length}', style: TextStyle(fontSize: 15)),
               ],
             ),
           ),
           const SizedBox(height: 15),
-
-          //https://stackoverflow.com/questions/53071451/how-to-specify-listtile-height-in-flutter
           Expanded(
-            child: ListView(
-              children: <Widget>[
-                ListTile(
-                  leading: Image.asset('asset/react.jpg'),
-                  title: Text('리액트를 다루는 기술 (김민준)'),
-                  subtitle: Text('2022-06-12'),
-                ),
-                ListTile(
-                  leading: Image.asset('asset/python_al.jpg'),
-                  title: Text('파이썬 알고리즘 인터뷰 (박상길)'),
-                  subtitle: Text('2022-06-10'),
-                ),
-              ],
-            ),
-          )
+              child: ListView.builder(
+                  itemCount: NetWorkHandler.user_borrow.length,
+                  itemBuilder: (context, index) {
+                    return Obx(
+                      () => ListTile(
+                        leading: Image.asset('${NetWorkHandler.user_borrow[index][5]}'),
+                        title: Text('${NetWorkHandler.user_borrow[index][0]}' + ' (' + '${NetWorkHandler.user_borrow[index][4]}' + ')',
+                            style: const TextStyle(fontSize: 13)),
+                        subtitle: Text('${NetWorkHandler.user_borrow[index][2]}' + '~' + '${NetWorkHandler.user_borrow[index][3]}'),
+                      ),
+                    );
+                  }))
         ],
       ),
     );

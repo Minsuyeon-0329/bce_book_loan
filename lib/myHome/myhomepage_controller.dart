@@ -11,7 +11,6 @@ class MyHomeController extends GetxController {
   var homelist = <HomeList>[].obs;
   var isLoading = RxBool(true);
   int leng = 0;
-
   @override
   void onInit() {
     super.onInit();
@@ -23,6 +22,7 @@ class MyHomeController extends GetxController {
     print(response.body);
     if (response.statusCode == 200) {
       HomeList _home = HomeList.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      print('testing');
       print(_home.home);
       leng = _home.home.length;
       homelist.clear();

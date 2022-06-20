@@ -62,16 +62,16 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('공지사항', style: TextStyle(fontSize: 20)),
-              Container(
-                  child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 15,
-                  ),
-                  Text('더보기')
-                ],
-              )),
+              //Container(
+              //    child: Row(
+              //  children: [
+              //    Icon(
+              //      Icons.add,
+              //      size: 15,
+              //    ),
+              //    Text('더보기')
+              //  ],
+              //)),
             ],
           ),
         ),
@@ -90,17 +90,16 @@ class HomePage extends StatelessWidget {
                     itemCount: noticeController.leng,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text('${noticeController.notlist[0].not[index]['fields']['title']}', style: const TextStyle(fontSize: 13)),
-                            Divider(),
-                          ],
-                        ),
-                      );
+                          padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 5),
+                              Text('${noticeController.notlist[0].not[index]['fields']['title']}', style: const TextStyle(fontSize: 13)),
+                              const Divider(),
+                            ],
+                          ));
                     }),
               ),
             ),
@@ -116,16 +115,16 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('학사일정', style: TextStyle(fontSize: 20)),
-              Container(
-                  child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 15,
-                  ),
-                  Text('더보기')
-                ],
-              )),
+              //Container(
+              //    child: Row(
+              //  children: [
+              //    Icon(
+              //      Icons.add,
+              //      size: 15,
+              //    ),
+              //    Text('더보기')
+              //  ],
+              //)),
             ],
           ),
         ),

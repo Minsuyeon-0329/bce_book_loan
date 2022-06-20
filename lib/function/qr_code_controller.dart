@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:bce_app/function/qr_list.dart';
+import 'package:bce_app/network_handler.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,13 +20,22 @@ class QrCodeController extends GetxController {
   }
 
   Future<void> fetchPost() async {
+    print('intoFetch');
     Map<String, dynamic> data = {"url": qrInfo};
     Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/QrDecode/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));
-    if ((response.body.length == 20) & (response.statusCode == 200)) {
+    if (returnState == true) {
+      QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
+      print(_qrs.qrs);
+      qrlist.clear();
+      qrlist.add(QRs(qrs: _qrs.qrs));
+    } else if ((response.body.length == 20) & (response.statusCode == 200)) {
+      print('inreturn');
       returnState = true;
       loan = false;
+      return;
     } else if (response.statusCode == 200) {
+      print('inborrow');
       QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
       loan = true;
       returnState = false;
@@ -36,7 +46,7 @@ class QrCodeController extends GetxController {
   }
 
   Future<void> Borrow() async {
-    Map<String, dynamic> data = {"url": qrInfo};
+    Map<String, dynamic> data = {"url": qrInfo, 'email': NetWorkHandler.user_email};
     Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/Borrow/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));
     if (response.statusCode == 200) {
@@ -47,7 +57,7 @@ class QrCodeController extends GetxController {
   }
 
   Future<void> Return() async {
-    Map<String, dynamic> data = {"url": qrInfo};
+    Map<String, dynamic> data = {"url": qrInfo, 'email': NetWorkHandler.user_email};
     Uri url = Uri(scheme: 'http', host: '10.125.218.14', port: 8088, path: 'book/Return/', queryParameters: data);
     http.Response response = await http.get(Uri.parse("$url"));
     if (response.statusCode == 200) {
