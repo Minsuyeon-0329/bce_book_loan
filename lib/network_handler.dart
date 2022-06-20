@@ -14,6 +14,7 @@ class NetWorkHandler {
   static String user_email = "";
   static int user_num = 0;
   static String user_borrow = "";
+  static int borrow_len =0;
 
   static Future<String> logoutpost(String endpoint) async {
     http.Response response_logout = await http.post(builderUrl(endpoint), headers: {"content-type": "application/json"});
@@ -69,9 +70,11 @@ class NetWorkHandler {
       user_email = userInfo[0].usermodel[0]['fields']['email'];
       user_num = userInfo[0].usermodel[0]['fields']['bce_digit'];
       user_borrow = userInfo[0].usermodel[0]['fields']['borrowed_list'];
+      borrow_len = user_borrow[0].length;
 
       print('사용자 정보');
-      print(userInfo[0].usermodel[0]['fields']['email']);
+      print(userInfo[0].usermodel[0]['fields']['borrowed_list']);
+      print(borrow_len);
     }
     return response_user.body;
   }

@@ -40,14 +40,14 @@ class MyPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('My 대출', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                Text('대여권수: ' + '${NetWorkHandler.user_borrow.length}', style: TextStyle(fontSize: 15)),
+                Text('대여권수: ' + '${NetWorkHandler.borrow_len}', style: TextStyle(fontSize: 15)),
               ],
             ),
           ),
           const SizedBox(height: 15),
           Expanded(
               child: ListView.builder(
-                  itemCount: NetWorkHandler.user_borrow.length,
+                  itemCount: NetWorkHandler.borrow_len,
                   itemBuilder: (context, index) {
                     return Obx(
                       () => ListTile(

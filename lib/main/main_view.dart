@@ -54,13 +54,13 @@ Widget getDrawer() {
   return Drawer(
     child: Column(
       children: <Widget>[
-        const UserAccountsDrawerHeader(
+         UserAccountsDrawerHeader(
           currentAccountPicture: CircleAvatar(
             backgroundImage: AssetImage('asset/bce_logo.png'),
             backgroundColor: Color.fromRGBO(199, 201, 199, 1),
           ),
-          accountName: Text('최준영'),
-          accountEmail: Text('chois@naver.com'),
+          accountName: Text('${NetWorkHandler.user_name}'),
+          accountEmail: Text('${NetWorkHandler.user_email}'),
           decoration: BoxDecoration(
             color: Color.fromRGBO(10, 101, 83, 1),
           ),
@@ -106,8 +106,6 @@ Widget getFooter() {
           children: List.generate(buttomItems.length, (index) {
             return GestureDetector(
               onTap: () {
-                print(NetWorkHandler.user_name);
-                print(NetWorkHandler.user_email);
                 mainController.pageTab(index);
                 print(mainController.pageIndex);
               },
