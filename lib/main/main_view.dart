@@ -1,7 +1,7 @@
 import 'package:bce_app/login/login.dart';
 import 'package:bce_app/login/logout_controller.dart';
 import 'package:bce_app/main/main_view_controller.dart';
-import 'package:bce_app/myhomepage.dart';
+import 'package:bce_app/myHome/myhomepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -65,12 +65,11 @@ Widget getDrawer() {
           ),
         ),
         GestureDetector(
-            onTap: (){
+            onTap: () {
               logoutController.logout();
               Get.offAll(LoginPage());
             },
-            child: ListTile(title: Center(child: Text('로그 아웃')))
-        ),
+            child: ListTile(title: Center(child: Text('로그 아웃')))),
         Divider(),
         Expanded(child: SizedBox()),
         ListTile(
