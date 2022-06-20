@@ -64,16 +64,16 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('공지사항', style: TextStyle(fontSize: 20)),
-              Container(
-                  child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 15,
-                  ),
-                  Text('더보기')
-                ],
-              )),
+              // Container(
+              //     child: Row(
+              //   children: [
+              //     Icon(
+              //       Icons.add,
+              //       size: 15,
+              //     ),
+              //     Text('더보기')
+              //   ],
+              // )),
             ],
           ),
         ),

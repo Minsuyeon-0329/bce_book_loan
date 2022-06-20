@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:bce_app/main/main_view.dart';
 import 'package:bce_app/register/register_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,10 +7,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class NetWorkHandler{
-
   static Future<String> logoutpost(String endpoint) async{
     http.Response response_logout = await http.post(builderUrl(endpoint),headers: {"content-type":"application/json"});
-
     return response_logout.body;
   }
 
@@ -54,6 +51,7 @@ class NetWorkHandler{
     return response_register.body;
 
   }
+
 
 
   static Uri builderUrl(String endpoint){

@@ -67,7 +67,7 @@ Widget getDrawer() {
         GestureDetector(
             onTap: (){
               logoutController.logout();
-              Get.to(LoginPage());
+              Get.offAll(LoginPage());
             },
             child: ListTile(title: Center(child: Text('로그 아웃')))
         ),
