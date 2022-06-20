@@ -1,31 +1,31 @@
 import 'dart:convert';
+import 'package:bce_app/login/login_controller.dart';
 import 'package:bce_app/main/main_view.dart';
 import 'package:bce_app/register/register_view.dart';
+import 'package:bce_app/user/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class NetWorkHandler{
+
   static Future<String> logoutpost(String endpoint) async{
     http.Response response_logout = await http.post(builderUrl(endpoint),headers: {"content-type":"application/json"});
     return response_logout.body;
   }
 
-
   static Future<String> loginpost(var body, String endpoint) async{
-    String my_access_token = "";
-    String my_refresh_token = "";
-
+    var loginController = Get.put(LoginController());
     http.Response response_login = await http.post(builderUrl(endpoint),body:body,headers: {"content-type":"application/json"});
 
 
     if (response_login.statusCode ==200){
+      print('response login check:');
       print(response_login.statusCode);
       print(response_login.body);
 
-      my_access_token=jsonDecode(response_login.body)['access_token'];
-      my_refresh_token=jsonDecode(response_login.body)['refresh_token'];
+      userget('get_user/?email=${loginController.emailTextController.text}');
       Get.to(() => MainViewPage());
     }else{
       Get.to(()=>RegisterPage());
@@ -36,7 +36,7 @@ class NetWorkHandler{
 
 
   static Future<String> registerpost(var body, String endpoint) async{
-    http.Response response_register = await http.post(builderUrl(endpoint),body:body,headers: {"content-type":"application/json"});
+    http.Response response_register = await http.post(builderUrl(endpoint),body:body,headers: {"content-type":"text/plain"});
     print(response_register.statusCode);
     print(body);
     print(response_register.body);
@@ -53,6 +53,23 @@ class NetWorkHandler{
   }
 
 
+  static Future<String> userget(String endpoint) async{
+    RxList userInfo = <UserModel>[].obs;
+
+    http.Response response_user = await http.get(builderUrl(endpoint),
+        headers: {"content-type":"application/json"});
+    print(response_user.statusCode);
+    print(response_user.body);
+    if (response_user.statusCode == 200){
+      UserModel _user = UserModel.fromJson(jsonDecode(utf8.decode(response_user.bodyBytes)));
+      userInfo.clear();
+      userInfo.add(UserModel(usermodel: _user.usermodel));
+      print(userInfo);
+    }
+
+    return response_user.body;
+
+  }
 
   static Uri builderUrl(String endpoint){
     String host = 'http://10.125.218.14:8088/';
