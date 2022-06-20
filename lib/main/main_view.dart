@@ -2,6 +2,7 @@ import 'package:bce_app/login/login.dart';
 import 'package:bce_app/login/logout_controller.dart';
 import 'package:bce_app/main/main_view_controller.dart';
 import 'package:bce_app/myHome/myhomepage.dart';
+import 'package:bce_app/network_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -105,6 +106,8 @@ Widget getFooter() {
           children: List.generate(buttomItems.length, (index) {
             return GestureDetector(
               onTap: () {
+                print(NetWorkHandler.user_name);
+                print(NetWorkHandler.user_email);
                 mainController.pageTab(index);
                 print(mainController.pageIndex);
               },

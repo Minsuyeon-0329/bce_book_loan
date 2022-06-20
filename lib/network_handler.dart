@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 class NetWorkHandler{
   static String user_name = "";
   static String user_email ="";
+  static int user_num=0;
+  static String user_borrow="";
 
 
   static Future<String> logoutpost(String endpoint) async{
@@ -45,7 +47,7 @@ class NetWorkHandler{
       Get.to(()=>MainViewPage());
     }else{
       openSnackbar();
-      print('alreay have an account. please Sign up with a different account');
+      print('already have an account. please Sign up with a different account');
     }
 
     return response_register.body;
@@ -66,7 +68,10 @@ class NetWorkHandler{
       userInfo.add(UserModel(usermodel: _user.usermodel));
 
       user_name = userInfo[0].usermodel[0]['fields']['bce_name'];
-      user_email=userInfo[0].usermodel[0]['fields']['email'];
+      user_email = userInfo[0].usermodel[0]['fields']['email'];
+      user_num = userInfo[0].usermodel[0]['fields']['bce_digit'];
+      user_borrow = userInfo[0].usermodel[0]['fields']['borrowed_list'];
+
 
 
       print('사용자 정보');

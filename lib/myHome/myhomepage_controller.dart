@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../login/login_controller.dart';
 import 'myhome_list.dart';
 
 class MyHomeController extends GetxController {
@@ -17,7 +18,8 @@ class MyHomeController extends GetxController {
   }
 
   Future<void> fetchPost() async {
-    http.Response response = await http.get(Uri.parse('http://10.125.218.14:8088/get_user'));
+    var loginController = Get.put(LoginController());
+    http.Response response = await http.get(Uri.parse('http://10.125.218.14:8088/get_user/?email=${loginController.emailTextController.text}'));
     print(response.body);
     if (response.statusCode == 200) {
       HomeList _home = HomeList.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
