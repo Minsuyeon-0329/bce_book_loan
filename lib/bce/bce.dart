@@ -1,6 +1,7 @@
 import 'package:bce_app/bce/bce_controller.dart';
 import 'package:bce_app/bce/search_controller.dart';
 import 'package:bce_app/book/detail.dart';
+import 'package:bce_app/network_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -116,7 +117,6 @@ displayNoSearchResultScreen() {
 
 displayBookListScreen() {
   SearchController _searchcontroller = Get.put(SearchController());
-
   return ListView.builder(
     itemCount: _searchcontroller.length,
       itemBuilder: (context, index) {

@@ -9,6 +9,9 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class NetWorkHandler{
+  static String user_name = "";
+  static String user_email ="";
+
 
   static Future<String> logoutpost(String endpoint) async{
     http.Response response_logout = await http.post(builderUrl(endpoint),headers: {"content-type":"application/json"});
@@ -18,7 +21,6 @@ class NetWorkHandler{
   static Future<String> loginpost(var body, String endpoint) async{
     var loginController = Get.put(LoginController());
     http.Response response_login = await http.post(builderUrl(endpoint), body:body, headers: {"content-type":"application/json"});
-
 
     if (response_login.statusCode ==200){
       print('response login check:');
@@ -31,9 +33,7 @@ class NetWorkHandler{
       Get.to(()=>RegisterPage());
     }
     return response_login.body;
-
   }
-
 
   static Future<String> registerpost(var body, String endpoint) async{
     http.Response response_register = await http.post(builderUrl(endpoint),body:body,headers: {"content-type":"text/plain"});
@@ -64,11 +64,15 @@ class NetWorkHandler{
       UserModel _user = UserModel.fromJson(jsonDecode(utf8.decode(response_user.bodyBytes)));
       userInfo.clear();
       userInfo.add(UserModel(usermodel: _user.usermodel));
-      print(userInfo);
+
+      user_name = userInfo[0].usermodel[0]['fields']['bce_name'];
+      user_email=userInfo[0].usermodel[0]['fields']['email'];
+
+
+      print('사용자 정보');
+      print(userInfo[0].usermodel[0]['fields']['email']);
     }
-
     return response_user.body;
-
   }
 
   static Uri builderUrl(String endpoint){
@@ -85,9 +89,6 @@ class NetWorkHandler{
       duration: const Duration(seconds: 5),
       backgroundColor: Color.fromRGBO(10, 101, 83, 1),
       colorText: Colors.white
-
-
-
 
 
     );
