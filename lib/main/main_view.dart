@@ -31,7 +31,7 @@ class MainViewPage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Get.to(() => AlarmPage());
+                // Get.to(() => AlarmPage());
               },
               icon: const Icon(Icons.alarm))
         ],
