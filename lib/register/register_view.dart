@@ -55,6 +55,8 @@ class RegisterPage extends StatelessWidget {
                 height: 25,
               ),
               TextFormField(
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 controller: registerController.pswTextController,
                 decoration: InputDecoration(
                   focusColor: Color.fromRGBO(10, 101, 83, 1),
@@ -66,6 +68,8 @@ class RegisterPage extends StatelessWidget {
                 height: 25,
               ),
               TextFormField(
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 controller: registerController.checkpswTextController,
                 decoration: InputDecoration(
                   focusColor: Color.fromRGBO(10, 101, 83, 1),

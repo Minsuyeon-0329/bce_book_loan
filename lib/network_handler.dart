@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bce_app/login/login.dart';
 import 'package:bce_app/login/login_controller.dart';
 import 'package:bce_app/main/main_view.dart';
 import 'package:bce_app/register/register_view.dart';
@@ -40,10 +41,10 @@ class NetWorkHandler {
   }
 
   static Future<String> registerpost(var body, String endpoint) async {
-    http.Response response_register = await http.post(builderUrl(endpoint), body: body, headers: {"content-type": "text/plain"});
+    http.Response response_register = await http.post(builderUrl(endpoint), body: body, headers: {"content-type": "application/json"});
 
     if (response_register.statusCode == 201) {
-      Get.to(() => MainViewPage());
+      Get.to(() => LoginPage());
     } else {
       openSnackbar();
       print('already have an account. please Sign up with a different account');
