@@ -26,7 +26,6 @@ class QrCodeController extends GetxController {
     http.Response response = await http.get(Uri.parse("$url"));
     if (returnState == true) {
       QRs _qrs = QRs.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-      print(_qrs.qrs);
       qrlist.clear();
       qrlist.add(QRs(qrs: _qrs.qrs));
     } else if ((response.body.length == 20) & (response.statusCode == 200)) {

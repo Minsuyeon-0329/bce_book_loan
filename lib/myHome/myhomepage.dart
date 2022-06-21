@@ -49,13 +49,16 @@ class MyPage extends StatelessWidget {
               child: ListView.builder(
                   itemCount: NetWorkHandler.borrow_len,
                   itemBuilder: (context, index) {
-                    return Obx(
-                      () => ListTile(
-                        leading: Image.asset('${NetWorkHandler.user_borrow[index][5]}'),
-                        title: Text('${NetWorkHandler.user_borrow[index][0]}' + ' (' + '${NetWorkHandler.user_borrow[index][4]}' + ')',
-                            style: const TextStyle(fontSize: 13)),
-                        subtitle: Text('${NetWorkHandler.user_borrow[index][2]}' + '~' + '${NetWorkHandler.user_borrow[index][3]}'),
-                      ),
+                    return SizedBox(
+                      height: 150,
+                      width: 100,
+                      child: Row(children: [
+                        Image.network(NetWorkHandler.user_borrow[index * 6 + 5], fit: BoxFit.contain),
+                        SizedBox(width: 15),
+                        Text('${NetWorkHandler.user_borrow[index * 6 + 2]}' + '~' + '${NetWorkHandler.user_borrow[index * 6 + 3]}',
+                            style: const TextStyle(fontSize: 17)),
+                        SizedBox(height: 15)
+                      ]),
                     );
                   }))
         ],

@@ -1,4 +1,5 @@
 import 'package:bce_app/home/schedules.dart';
+import 'package:bce_app/network_handler.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:get/get.dart';
@@ -32,21 +33,12 @@ class HomePage extends StatelessWidget {
                 color: Colors.white,
               ),
               child: ListView.builder(
-                  itemCount: 1,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: NetWorkHandler.borrow_len,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 5),
-                          Text('[도서] 리액트를 다루는 기술 (반납일 2022-06-12)'),
-                          Divider(),
-                          Text('[도서] 파이썬 알고리즘 인터뷰 (반납일 2022-06-10)'),
-                          Divider(),
-                        ],
-                      ),
+                    return Container(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      child: Image.network(NetWorkHandler.user_borrow[index * 6 + 5], height: 150, width: 100, fit: BoxFit.contain),
                     );
                   }),
             ),

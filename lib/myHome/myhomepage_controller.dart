@@ -19,11 +19,8 @@ class MyHomeController extends GetxController {
   Future<void> fetchPost() async {
     var loginController = Get.put(LoginController());
     http.Response response = await http.get(Uri.parse('http://10.125.218.14:8088/get_user/?email=${loginController.emailTextController.text}'));
-    print(response.body);
     if (response.statusCode == 200) {
       HomeList _home = HomeList.fromJson(jsonDecode(utf8.decode(response.bodyBytes)));
-      print('testing');
-      print(_home.home);
       leng = _home.home.length;
       homelist.clear();
       homelist.add(HomeList(home: _home.home));
