@@ -68,11 +68,11 @@ class NetWorkHandler {
       subBorrow = userInfo[0].usermodel[0]['fields']['borrowed_list'].split('[');
     }
 
-    subBorrow.obs.clear();
-    subBorrow1.obs.clear();
-    subBorrow2.obs.clear();
-    subBorrow3.obs.clear();
-    subBorrow4.obs.clear();
+    subBorrow.clear();
+    subBorrow1.clear();
+    subBorrow2.clear();
+    subBorrow3.clear();
+    subBorrow4.clear();
     for (int i = 0; i < subBorrow.length; i++) {
       if (subBorrow[i].length >= 2) {
         subBorrow1.insert(0, subBorrow[i]);
