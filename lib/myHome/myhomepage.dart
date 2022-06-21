@@ -8,8 +8,10 @@ import 'myhomepage_controller.dart';
 
 class MyPage extends StatelessWidget {
   MyHomeController homecontroller = Get.put(MyHomeController());
+
   Widget build(BuildContext context) {
     homecontroller.fetchPost();
+    NetWorkHandler.userget(NetWorkHandler.user_email);
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(

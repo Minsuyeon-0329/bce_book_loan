@@ -62,16 +62,17 @@ class NetWorkHandler {
       userInfo.clear();
       userInfo.add(UserModel(usermodel: _user.usermodel));
 
-      subBorrow = [];
-      subBorrow1 = [];
-      subBorrow2 = [];
-      subBorrow3 = [];
-      subBorrow4 = [];
       user_name = userInfo[0].usermodel[0]['fields']['bce_name'];
       user_email = userInfo[0].usermodel[0]['fields']['email'];
       user_num = userInfo[0].usermodel[0]['fields']['bce_digit'];
-      subBorrow = (userInfo[0].usermodel[0]['fields']['borrowed_list'].split('['));
+      subBorrow = userInfo[0].usermodel[0]['fields']['borrowed_list'].split('[');
     }
+
+    subBorrow.obs.clear();
+    subBorrow1.obs.clear();
+    subBorrow2.obs.clear();
+    subBorrow3.obs.clear();
+    subBorrow4.obs.clear();
     for (int i = 0; i < subBorrow.length; i++) {
       if (subBorrow[i].length >= 2) {
         subBorrow1.insert(0, subBorrow[i]);
@@ -98,6 +99,9 @@ class NetWorkHandler {
       }
     }
     borrow_len = user_borrow.length ~/ 6;
+    print(subBorrow);
+    print(user_borrow);
+    print(borrow_len);
 
     /*List<String> sub1 = [];
     List<String> sub2 = [];
