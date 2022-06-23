@@ -59,16 +59,17 @@ class NetWorkHandler {
     http.Response response_user = await http.get(builderUrl(endpoint), headers: {"content-type": "application/json"});
     if (response_user.statusCode == 200) {
       UserModel _user = UserModel.fromJson(jsonDecode(utf8.decode(response_user.bodyBytes)));
+
       userInfo.clear();
       userInfo.add(UserModel(usermodel: _user.usermodel));
 
       user_name = userInfo[0].usermodel[0]['fields']['bce_name'];
       user_email = userInfo[0].usermodel[0]['fields']['email'];
       user_num = userInfo[0].usermodel[0]['fields']['bce_digit'];
+      subBorrow.clear();
       subBorrow = userInfo[0].usermodel[0]['fields']['borrowed_list'].split('[');
     }
 
-    subBorrow.clear();
     subBorrow1.clear();
     subBorrow2.clear();
     subBorrow3.clear();
@@ -99,9 +100,6 @@ class NetWorkHandler {
       }
     }
     borrow_len = user_borrow.length ~/ 6;
-    print(subBorrow);
-    print(user_borrow);
-    print(borrow_len);
 
     /*List<String> sub1 = [];
     List<String> sub2 = [];

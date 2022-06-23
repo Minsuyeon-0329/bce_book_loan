@@ -2,15 +2,9 @@ import 'package:bce_app/network_handler.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-
-import 'myhomepage_controller.dart';
 
 class MyPage extends StatelessWidget {
-  MyHomeController homecontroller = Get.put(MyHomeController());
-
   Widget build(BuildContext context) {
-    homecontroller.fetchPost();
     NetWorkHandler.userget(NetWorkHandler.user_email);
     return Padding(
       padding: const EdgeInsets.all(12),
